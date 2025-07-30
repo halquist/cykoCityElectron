@@ -115,9 +115,9 @@
         }
     ],
     "attributes": {
-        "vertUpMoveSpeed": 1,
-        "vertDownMoveSpeed": 2,
-        "horzMoveSpeed": 2,
+        "vertUpMoveSpeed": 0.6,
+        "vertDownMoveSpeed": 1.2,
+        "horzMoveSpeed": 1.5,
         "fastScrollSpeed": 120,
         "maxHealth": 300,
         "damageCooldown": 100,

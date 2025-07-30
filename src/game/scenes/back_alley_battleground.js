@@ -55,6 +55,7 @@ class CykoCityTest extends Phaser.Scene {
 
         this.baseScrollSpeed = 80;
         this.scrollSpeed = this.baseScrollSpeed; // Adjust for desired speed
+        this.displayScrollSpeed = this.baseScrollSpeed;
 
         this.activeMeleeSensors = new Map(); // sensorBody -> attacker instance
 
@@ -335,6 +336,9 @@ class CykoCityTest extends Phaser.Scene {
         for (const p of this.projectiles) {
             p.update();
         }
+
+        const smoothing = 0.15;
+        this.displayScrollSpeed += (this.scrollSpeed - this.displayScrollSpeed) * smoothing;
     }
 }
 

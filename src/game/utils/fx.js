@@ -55,12 +55,12 @@ export function updateSparks(context, delta) {
     }
 }
 
+
 export function spawnTracer(context, x, y, spriteY, color) {
     const g = context.scene.add.graphics();
     g.setDepth(spriteY + context.scene.height);
     g.fillStyle(color, 1);
     g.fillRect(x, y, 1, 1);
-
     context.tracers.push({ x, y, alpha: 1, graphics: g });
 }
 
@@ -70,21 +70,25 @@ export function updateTracers(context, delta, {
     shouldEmit,
     tracerColor
 }) {
-    const baseSpeed = 46;
-    const baseInterval = 10;
-    const currentSpeed = context.scene.scrollSpeed;
-    const adjustedInterval = baseInterval * (baseSpeed / currentSpeed);
-    const transitionSpeed = 20;
+    const deltaSec = delta / 1000;
+    const scrollSpeed = context.scene.scrollSpeed;
+    const deltaY = scrollSpeed * deltaSec;
 
+    // === Distance-based emission ===
+    const emitDistance = 1;  // emit every 1px of background scroll
+
+    if (context.accumulatedScroll === undefined) context.accumulatedScroll = 0;
+    context.accumulatedScroll += deltaY;
+
+    // Smooth tail offset
+    const transitionSpeed = 20;
     const targetOffsets = getTargetOffsets();
     for (let i = 0; i < context.tailLightOffsets.length; i++) {
-        context.tailLightOffsets[i].lerp(targetOffsets[i], transitionSpeed * (delta / 1000));
+        context.tailLightOffsets[i].lerp(targetOffsets[i], transitionSpeed * deltaSec);
     }
 
-    context.tracerSpacingTimer += delta;
-
-    if (shouldEmit() && context.tracerSpacingTimer >= adjustedInterval) {
-        context.tracerSpacingTimer = 0;
+    while (shouldEmit() && context.accumulatedScroll >= emitDistance) {
+        context.accumulatedScroll -= emitDistance;
 
         const baseSprite = getSprite();
         for (const offset of context.tailLightOffsets) {
@@ -94,13 +98,12 @@ export function updateTracers(context, delta, {
         }
     }
 
-    const deltaSec = delta / 1000;
-    const deltaY = context.scene.scrollSpeed * deltaSec;
-
+    // === Move and fade tracers ===
+    const fadeRate = context.tracerFadeRate || 2.5;
     for (let i = context.tracers.length - 1; i >= 0; i--) {
         const tracer = context.tracers[i];
         tracer.y += deltaY;
-        tracer.alpha -= context.tracerFadeRate * deltaSec;
+        tracer.alpha -= fadeRate * deltaSec;
 
         if (tracer.alpha <= 0) {
             tracer.graphics.destroy();
@@ -108,7 +111,7 @@ export function updateTracers(context, delta, {
         } else {
             tracer.graphics.clear();
             tracer.graphics.fillStyle(tracerColor, tracer.alpha);
-            tracer.graphics.fillRect(tracer.x, tracer.y, 1, 1);
+            tracer.graphics.fillRect(tracer.x, tracer.y, 1, 1); // Slightly taller to close gaps
         }
     }
 }
@@ -116,7 +119,7 @@ export function updateTracers(context, delta, {
 export function updateRubberMarks(instance, delta, config = {}) {
     const {
         isHero = false,
-        backwardThreshold = 50,
+        backwardThreshold = 0.1,
         rubberColor = 0x151515,
     } = config;
 

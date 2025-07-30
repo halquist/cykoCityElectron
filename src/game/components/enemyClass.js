@@ -448,7 +448,7 @@ export default class Enemy {
                 if (moveState === "left_turn") return this.tailLightOffsetsLeft;
                 return this.tailLightOffsetsBase;
             },
-            shouldEmit: () => !this.isDead && this.currentVelocity.y < -50
+            shouldEmit: () => !this.isDead && this.currentVelocity.y <= -0.1
         });
     };
 
@@ -505,9 +505,6 @@ export default class Enemy {
         // Destroy effects
         for (const spark of this.activeSparks || []) {
             spark.graphics?.destroy();
-        }
-        for (const tracer of this.tracers || []) {
-            tracer.graphics?.destroy();
         }
         for (const mark of this.rubberMarks || []) {
             mark.graphics?.destroy();

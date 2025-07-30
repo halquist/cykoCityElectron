@@ -17,7 +17,7 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 320,
         height: 180,
-        autoHideMenuBar: true,
+        // autoHideMenuBar: true,
         // fullscreen: true,
         webPreferences: {
             // preload: preloadPath,
