@@ -1,0 +1,170 @@
+{
+    "spriteKey": "hero_bike",
+    "type": "hero",
+    "body": {
+        "radius": 9,
+        "mass": 5
+    },
+    "rider": {
+        "spriteKey": "basic_hero"
+    },
+    "bike": {
+        "spriteKey": "basic_hero_bike",
+        "tracerColor": "#6ae6aa"
+    },
+    "meleeWeapons": [
+        {
+            "name": "sword",
+            "spriteKey": "melee_sword",
+            "damageSensorWidth": 11,
+            "damageSensorHeight": 14,
+            "attacks": {
+                "fast": {
+                    "damageMin": 10,
+                    "damageMax": 20,
+                    "damageDelay": 200,
+                    "soundDelay": 0.2,
+                    "cooldown": 500,
+                    "knockback": 0.8
+                },
+                "strong": {
+                    "damageMin": 20,
+                    "damageMax": 30,
+                    "damageDelay": 500,
+                    "soundDelay": 0.4,
+                    "cooldown": 800,
+                    "knockback": 1.3
+                }
+            }
+        },
+        {
+            "name": "chain",
+            "spriteKey": "melee_chain",
+            "damageSensorWidth": 17,
+            "damageSensorHeight": 19,
+            "attacks": {
+                "fast": {
+                    "damageMin": 15,
+                    "damageMax": 25,
+                    "damageDelay": 200,
+                    "soundDelay": 0.2,
+                    "cooldown": 900,
+                    "knockback": 1.1
+                },
+                "strong": {
+                    "damageMin": 25,
+                    "damageMax": 45,
+                    "damageDelay": 500,
+                    "soundDelay": 0.4,
+                    "cooldown": 1500,
+                    "knockback": 1.5
+                }
+            }
+        }
+    ],
+    "rangedWeapons": [
+        {
+            "name": "handgun",
+            "spriteKey": "ranged_handgun",
+            "soundKey": "gunshot1",
+            "type": "projectile",
+            "color": "#6ae6aa",
+            "length": 20,
+            "damageMin": 17,
+            "damageMax": 30,
+            "maxAmmo": 6,
+            "currentAmmo": 6, 
+            "projectileSpeed": 9,
+            "reloadTime": 1000,
+            "delay": 0,
+            "cooldown": 800,
+            "knockback": 0.7
+        },
+        {
+            "name": "smg",
+            "spriteKey": "ranged_smg",
+            "soundKey": "gunshot1",
+            "type": "projectile",
+            "color": "#6ae6aa",
+            "length": 10,
+            "damageMin": 9,
+            "damageMax": 14,
+            "maxAmmo": 20,
+            "currentAmmo": 20, 
+            "projectileSpeed": 7,
+            "reloadTime": 1600,
+            "delay": 0,
+            "cooldown": 80,
+            "knockback": 0.4
+        },
+        {
+            "name": "particle_cannon",
+            "spriteKey": "ranged_particle_cannon",
+            "soundKey": "particleRifleShot",
+            "type": "beam",
+            "color": "#ef2064",
+            "damageMin": 75,
+            "damageMax": 110,
+            "maxAmmo": 3,
+            "currentAmmo": 3, 
+            "reloadTime": 4000,
+            "projectileSpeed": 0,
+            "delay": 0,
+            "cooldown": 2000,
+            "knockback": 1.1
+        }
+    ],
+    "attributes": {
+        "vertUpMoveSpeed": 1,
+        "vertDownMoveSpeed": 2,
+        "horzMoveSpeed": 2,
+        "fastScrollSpeed": 120,
+        "maxHealth": 300,
+        "damageCooldown": 100,
+        "selfKnockbackDuration": 200,
+        "jumpDuration": 800,
+        "jumpSpeed": 6
+    },
+    "abilities": {
+        "dash" :{
+            "type": [ "melee", "movement" ],
+            "speed": 3,
+            "duration": 1000,
+            "cooldown": 8000,
+            "damage": 100,
+            "knockback": 3
+        }
+    },
+    "gunOffsets": {
+        "center": {
+            "right_right": { "x": 10, "y": -4 },
+            "down_right":  { "x": 9,  "y": 6 },
+            "down_down":   { "x": 3,  "y": 6 },
+            "down_left":   { "x": -8, "y": 4 },
+            "left_left":   { "x": -10, "y": -4 },
+            "up_left":     { "x": -9, "y": -8 },
+            "up_up":       { "x": 0,  "y": -12 },
+            "up_right":    { "x": 9,  "y": -8 }
+        },
+        "right_turn": {
+            "right_right": { "x": 12, "y": -4 },
+            "down_right":  { "x": 12, "y": 5 },
+            "down_down":   { "x": 7,  "y": 6 },
+            "down_left":   { "x": -4, "y": 5 },
+            "left_left":   { "x": -8, "y": -4 },
+            "up_left":     { "x": -7, "y": -8 },
+            "up_up":       { "x": 7,  "y": -12 },
+            "up_right":    { "x": 12, "y": -8 }
+        },
+        "left_turn": {
+            "right_right": { "x": 6,  "y": -3 },
+            "down_right":  { "x": 5,  "y": 6 },
+            "down_down":   { "x": 0,  "y": 6 },
+            "down_left":   { "x": -13, "y": 6 },
+            "left_left":   { "x": -12, "y": -3 },
+            "up_left":     { "x": -13, "y": -7 },
+            "up_up":       { "x": -2, "y": -12 },
+            "up_right":    { "x": 5,  "y": -8 }
+        }
+    }
+}

@@ -1,0 +1,129 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 61, "y": 125, "w": 8, "h": 12 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 36, "y": 34, "w": 8, "h": 12 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "1": {
+    "frame": { "x": 61, "y": 111, "w": 10, "h": 13 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 35, "y": 33, "w": 10, "h": 13 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "2": {
+    "frame": { "x": 61, "y": 79, "w": 15, "h": 18 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 32, "y": 29, "w": 15, "h": 18 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 75
+   },
+   "3": {
+    "frame": { "x": 158, "y": 150, "w": 40, "h": 35 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 20, "y": 22, "w": 40, "h": 35 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 75
+   },
+   "4": {
+    "frame": { "x": 0, "y": 134, "w": 60, "h": 51 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 19, "w": 60, "h": 51 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 75
+   },
+   "5": {
+    "frame": { "x": 0, "y": 79, "w": 60, "h": 54 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 14, "w": 60, "h": 54 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "6": {
+    "frame": { "x": 79, "y": 78, "w": 78, "h": 72 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 6, "w": 78, "h": 72 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "7": {
+    "frame": { "x": 159, "y": 0, "w": 78, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 3, "w": 78, "h": 77 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "8": {
+    "frame": { "x": 0, "y": 0, "w": 78, "h": 78 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 78, "h": 78 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "9": {
+    "frame": { "x": 79, "y": 0, "w": 79, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 1, "w": 79, "h": 77 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "10": {
+    "frame": { "x": 158, "y": 78, "w": 79, "h": 71 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 2, "w": 79, "h": 71 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "11": {
+    "frame": { "x": 61, "y": 98, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 36, "y": 34, "w": 12, "h": 12 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.14.4-x64",
+  "image": "barrel_explosive.png",
+  "format": "I8",
+  "size": { "w": 237, "h": 185 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "barrel_explosive_explode", "from": 1, "to": 10, "direction": "forward", "color": "#000000ff" },
+   { "name": "barrel_explosive_fallen", "from": 11, "to": 11, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "barrel", "opacity": 255, "blendMode": "normal" },
+   { "name": "slime", "opacity": 255, "blendMode": "normal" },
+   { "name": "explosion_flare", "opacity": 255, "blendMode": "normal" },
+   { "name": "explosion_shade", "opacity": 255, "blendMode": "normal" },
+   { "name": "explosion_body", "opacity": 255, "blendMode": "normal" },
+   { "name": "inside_lines", "opacity": 255, "blendMode": "normal" },
+   { "name": "explosion_over_lines", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 5", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 6", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" },
+   { "name": "explosion_flare_over", "opacity": 255, "blendMode": "normal" },
+   { "name": "explosion_shade_over", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 7", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -1,0 +1,43 @@
+{
+    "name": "template-webpack",
+    "version": "3.3.0",
+    "main": "dist/main.cjs",
+    "scripts": {
+        "electron": "electron .",
+        "build": "npm run build:main && npm run build:renderer",
+        "build:main": "webpack --config webpack.main.cjs",
+        "build:renderer": "webpack --config webpack.renderer.cjs",
+        "start": "electron ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/phaserjs/template-webpack.git"
+    },
+    "author": "Phaser Studio <support@phaser.io> (https://phaser.io/)",
+    "license": "MIT",
+    "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+    "bugs": {
+        "url": "https://github.com/phaserjs/template-webpack/issues"
+    },
+    "homepage": "https://github.com/phaserjs/template-webpack#readme",
+    "devDependencies": {
+        "@babel/core": "^7.28.0",
+        "@babel/preset-env": "^7.28.0",
+        "babel-loader": "^10.0.0",
+        "clean-webpack-plugin": "^4.0.0",
+        "copy-webpack-plugin": "^13.0.0",
+        "electron": "^37.2.4",
+        "file-loader": "^6.2.0",
+        "html-webpack-plugin": "^5.6.3",
+        "path-browserify": "^1.0.1",
+        "raw-loader": "^4.0.2",
+        "terser-webpack-plugin": "^5.3.14",
+        "webpack": "^5.101.0",
+        "webpack-cli": "^6.0.1",
+        "webpack-dev-server": "^5.2.1",
+        "webpack-merge": "^6.0.0"
+    },
+    "dependencies": {
+        "phaser": "^3.90.0"
+    }
+}

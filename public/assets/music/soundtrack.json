@@ -1,0 +1,29 @@
+{
+    "defiance" : [
+        "rebel_with_a_cause"
+    ],
+    "megacorp" : [
+        "waltz_of_the_corpos"
+    ],
+    "nexus": [
+        "analog_signal"
+    ],
+    "evolved": [
+        "mutants_march"
+    ],
+    "battle": [
+        "battle_march",
+        "battle_march_2"
+    ],
+    "background": [
+        "atmospheric_theme",
+        "city_sleeps",
+        "gutter_slime",
+        "lithium_vibes",
+        "peking_opera",
+        "silicone_fugue"
+    ],
+    "death": [
+        "requiem"
+    ]
+}

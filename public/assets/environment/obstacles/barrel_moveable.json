@@ -1,0 +1,35 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 13, "y": 0, "w": 8, "h": 12 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 4, "y": 2, "w": 8, "h": 12 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 100
+   },
+   "1": {
+    "frame": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 4, "y": 2, "w": 12, "h": 12 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.14.3-x64",
+  "image": "barrel_moveable.png",
+  "format": "I8",
+  "size": { "w": 21, "h": 12 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "barrel_moveable_fallen", "from": 1, "to": 1, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

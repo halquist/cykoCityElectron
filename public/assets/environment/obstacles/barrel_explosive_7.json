@@ -1,0 +1,125 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 207, "y": 85, "w": 8, "h": 12 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 36, "y": 34, "w": 8, "h": 12 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "1": {
+    "frame": { "x": 207, "y": 71, "w": 10, "h": 13 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 35, "y": 33, "w": 10, "h": 13 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "2": {
+    "frame": { "x": 186, "y": 109, "w": 15, "h": 20 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 32, "y": 29, "w": 15, "h": 20 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 75
+   },
+   "3": {
+    "frame": { "x": 148, "y": 109, "w": 37, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 21, "y": 25, "w": 37, "h": 31 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 75
+   },
+   "4": {
+    "frame": { "x": 148, "y": 58, "w": 58, "h": 50 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 9, "y": 16, "w": 58, "h": 50 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 75
+   },
+   "5": {
+    "frame": { "x": 148, "y": 0, "w": 68, "h": 57 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 4, "y": 13, "w": 68, "h": 57 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "6": {
+    "frame": { "x": 74, "y": 67, "w": 73, "h": 65 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 2, "y": 7, "w": 73, "h": 65 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "7": {
+    "frame": { "x": 0, "y": 69, "w": 73, "h": 64 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 2, "y": 8, "w": 73, "h": 64 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "8": {
+    "frame": { "x": 74, "y": 0, "w": 73, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 2, "y": 6, "w": 73, "h": 66 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "9": {
+    "frame": { "x": 0, "y": 0, "w": 73, "h": 68 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 2, "y": 4, "w": 73, "h": 68 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "10": {
+    "frame": { "x": 74, "y": 133, "w": 73, "h": 40 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 2, "y": 32, "w": 73, "h": 40 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   },
+   "11": {
+    "frame": { "x": 207, "y": 58, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 36, "y": 34, "w": 12, "h": 12 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.14.4-x64",
+  "image": "barrel_explosive_7.png",
+  "format": "I8",
+  "size": { "w": 219, "h": 173 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "barrel_explosive_explode", "from": 1, "to": 9, "direction": "forward", "color": "#000000ff" },
+   { "name": "barrel_explosive_crater", "from": 10, "to": 10, "direction": "forward", "color": "#000000ff" },
+   { "name": "barrel_explosive_fallen", "from": 11, "to": 11, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Layer 8", "opacity": 255, "blendMode": "normal" },
+   { "name": "slime", "opacity": 255, "blendMode": "normal" },
+   { "name": "ground", "opacity": 255, "blendMode": "normal" },
+   { "name": "ground highlights", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 11", "opacity": 255, "blendMode": "normal" },
+   { "name": "explosion_body", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 9", "opacity": 255, "blendMode": "normal" },
+   { "name": "smoke", "opacity": 255, "blendMode": "normal" },
+   { "name": "smoke_higlights", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
