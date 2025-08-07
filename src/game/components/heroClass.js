@@ -85,6 +85,15 @@ export default class Hero {
         this.deathAnimPlayed = false;
 
 
+        // === DRIFTING ===
+        this.isDrifting = false;
+        this.driftTimer = 0;
+        this.driftCooldown = 0;
+        this.maxDriftTime = 800;        // in milliseconds
+        this.driftCooldownTime = 500;   // in milliseconds
+        this.driftDecayRate = 0.002;     // velocity decay per ms
+        this.driftVelocity = new Phaser.Math.Vector2();
+        this.queuedPostDriftAction = null;
 
         // === JUMP ===
         this.jumpDuration = attr.jumpDuration ?? 800;
@@ -227,11 +236,34 @@ export default class Hero {
     }
 
     inputCheck() {
+        // === Prevent attack/shooting during drift, but allow queuing ===
+        if (this.isDrifting) {
+            const mousePressed = this.scene.mouse.leftButtonDown();
+            const gamepad = this.scene.input.gamepad.getPad(0);
+            const padPressed = gamepad && (gamepad.buttons[4]?.pressed || gamepad.buttons[5]?.pressed);
+            const meleeInputActive = mousePressed || padPressed;
+
+            const fireInput = mousePressed || gamepad?.buttons[7]?.value > 0.1;
+
+            if (!this.queuedPostDriftAction) {
+                if (this.inProjectileMode && fireInput && this.canShoot()) {
+                    this.queuedPostDriftAction = { type: "projectile" };
+                } else if (meleeInputActive && !this.isMeleeAttacking && this.canAttack()) {
+                    const currentDirection = this.getMoveState();
+                    const direction = currentDirection === "left_turn" ? 'left' : currentDirection === "right_turn" ? 'right' : 'right';
+                    this.queuedPostDriftAction = { type: "melee", direction: direction };
+                }
+            }
+
+            return; // Skip rest of inputCheck during drift
+        }
+
         const keys = this.scene.keys;
         this.downMove = keys.S.isDown;
         this.upMove = keys.W.isDown;
         this.leftMove = keys.A.isDown;
         this.rightMove = keys.D.isDown;
+        this.driftInput = keys.CTRL.isDown;
     
         const gamepad = this.scene.input.gamepad.getPad(0);
         const threshold = 0.2;
@@ -356,6 +388,31 @@ export default class Hero {
         if (!meleeInputActive) {
             this.strongAttackTriggered = false;
         }
+
+        // if (this.driftInput && (this.leftMove || this.rightMove) && !this.isJumping) {
+        //     this.isDrifting = true;
+        //     this.driftTimer = this.maxDriftTime;
+        //     this.driftDirection = this.leftMove ? -1 : 1;
+        //     const side = this.driftDirection === -1 ? 'left' : 'right';
+        //     spawnSparks(this, this.bodySprite.x, this.bodySprite.y, side, () => this.bikeSprite.depth + 1);
+        // }
+
+        if (this.driftInput && !this.isDrifting && this.driftCooldown <= 0) {
+            this.isDrifting = true;
+            this.driftTimer = this.maxDriftTime;
+            const sound = this.scene.soundObj.tireSkid1;
+            if (!sound.isPlaying) {
+                sound.play();
+            }
+        
+            // Use current movement direction or input
+            const direction = new Phaser.Math.Vector2(
+                (this.leftMove ? -1 : 0) + (this.rightMove ? 1 : 0),
+                0
+            ).normalize();
+        
+            this.driftVelocity = direction.scale(this.horzMoveSpeed * 2.5); // or custom value
+        }
     }
 
     executeMeleeAttack(type = "fast") {
@@ -410,6 +467,13 @@ export default class Hero {
     
         if (this.isDashing) {
             const animKey = `dash_attack`;
+            this.playAnimation(animKey, true);
+            return;
+        }
+
+        // === Drifting Animation ===
+        if (this.isDrifting) {
+            const animKey = `${moveState}_spin`;
             this.playAnimation(animKey, true);
             return;
         }
@@ -502,10 +566,14 @@ export default class Hero {
     
     move(delta) {
         if (this.isJumping || this.disableSteering) return;
+
+        // === Drift timing ===
+        if (this.driftCooldown > 0) {
+            this.driftCooldown -= delta;
+        }
     
         const deltaSeconds = delta / 1000;
     
-        // Handle knockback: allow physics but skip movement logic
         if (this.knockbackTimer > 0) {
             this.knockbackTimer -= delta;
             return;
@@ -529,14 +597,84 @@ export default class Hero {
         } else {
             this.scene.soundObj.powerBoost1.stop();
         }
+
+        if (this.isDrifting) {
+            this.driftTimer -= delta;
+        
+            // Subtle vertical influence
+            const verticalInfluence = this.upMove ? -0.15 : this.downMove ? 0.15 : 0;
+            this.driftVelocity.y += verticalInfluence * this.horzMoveSpeed * (delta / 1000);
+        
+            // Apply decay
+            this.driftVelocity.scale(1 - this.driftDecayRate * delta);
+        
+            // Apply to body
+            this.currentVelocity.copy(this.driftVelocity);
+            this.bodySprite.setVelocity(this.currentVelocity.x, this.currentVelocity.y);
+        
+            // End drift when time or speed runs out
+            if (this.driftTimer <= 0 || this.driftVelocity.lengthSq() < 0.01) {
+                this.isDrifting = false;
+                this.driftCooldown = this.driftCooldownTime;
+                this.driftVelocity.set(0, 0);
+            
+                // 🡺 Trigger queued action, if any
+                if (this.queuedPostDriftAction) {
+                    const action = this.queuedPostDriftAction;
+                    this.queuedPostDriftAction = null;
+            
+                    if (action.type === "melee") {
+                        this.pendingMeleeDirection = action.direction;
+                        this.executeMeleeAttack("fast"); // or "strong" if you prefer
+                    } else if (action.type === "projectile") {
+                        this.fireProjectileAtCursor();
+                    }
+                }
+            }
+        
+            return;
+        }
+        
+        
     
+        // // === Drift Activation ===
+        // if (this.isDrifting) {
+        //     const driftInputActive = this.driftInput && (this.leftMove || this.rightMove);
+        
+        //     if (!driftInputActive) {
+        //         // Cancel drift if input stops
+        //         this.isDrifting = false;
+        //         this.driftCooldown = this.driftCooldownTime;
+        //         this.driftVelocity.set(0, 0);
+        //     } else {
+        //         this.driftTimer -= delta;
+        
+        //         // Decay drift velocity
+        //         this.driftVelocity.scale(1 - this.driftDecayRate * delta);
+        
+        //         // Apply drift to velocity
+        //         this.currentVelocity.copy(this.driftVelocity);
+        //         this.bodySprite.setVelocity(this.currentVelocity.x, this.currentVelocity.y);
+        
+        //         // End drift if time or speed runs out
+        //         if (this.driftTimer <= 0 || this.driftVelocity.lengthSq() < 0.01) {
+        //             this.isDrifting = false;
+        //             this.driftCooldown = this.driftCooldownTime;
+        //             this.driftVelocity.set(0, 0);
+        //         }
+        
+        //         return;
+        //     }
+        // }
+             
+        
         // === Input-Based Velocity ===
         if (this.upMove && (!this.downMove || this.lastVertical === 'up')) {
             vy = -baseUpVY;
         } else if (this.downMove && (!this.upMove || this.lastVertical === 'down')) {
             vy = baseDownVY;
         }
-    
+
         if (this.leftMove && (!this.rightMove || this.lastHorizontal === 'left')) {
             vx = -baseVX;
         } else if (this.rightMove && (!this.leftMove || this.lastHorizontal === 'right')) {
@@ -567,6 +705,7 @@ export default class Hero {
         this.currentVelocity.lerp(this.desiredVelocity, 10 * deltaSeconds);
         this.bodySprite.setVelocity(this.currentVelocity.x, this.currentVelocity.y);
     }
+    
 
     spawnMeleeSparks = (x, y, side) => {
         spawnSparks(this, x, y, side, () => this.bikeSprite.depth + 1);

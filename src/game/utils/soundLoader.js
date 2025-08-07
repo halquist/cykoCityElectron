@@ -14,6 +14,7 @@ const soundLoader = (scene, soundArr) => {
   scene.load.audio("hero_death", "assets/sound/death/hero_death.mp3")
   scene.load.audio("power_boost_1", "assets/sound/vehicles/power_boost.mp3")
   scene.load.audio("tire_screech_1", "assets/sound/vehicles/tire_screech.mp3")
+  scene.load.audio("tire_skid_1", "assets/sound/vehicles/tire_skid.mp3")
   scene.load.audio("bike_thud", "assets/sound/vehicles/bike_thud.mp3")
   scene.load.audio("dash", "assets/sound/vehicles/dash.mp3")
   scene.load.audio("explosion_1", "assets/sound/weapons/explosion_1.mp3")
@@ -38,6 +39,7 @@ export const soundCreator = (scene, soundArr) => {
   scene.soundObj.deathGrunt1 = scene.sound.add("death_grunt_1", {volume: 0.8});
   scene.soundObj.heroDeath = scene.sound.add("hero_death", {volume: 0.8});
   scene.soundObj.tireScreech1 = scene.sound.add("tire_screech_1", {volume: 0.2});
+  scene.soundObj.tireSkid1 = scene.sound.add("tire_skid_1", {volume: 0.3});
   scene.soundObj.bikeThud1 = scene.sound.add("bike_thud", {volume: 0.5});
   scene.soundObj.explosion1 = scene.sound.add("explosion_1", {volume: 0.8});
   scene.soundObj.bulletHit1 = scene.sound.add("bullet_hit_1", {volume: 0.4});

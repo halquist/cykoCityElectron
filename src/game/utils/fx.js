@@ -60,7 +60,7 @@ export function spawnTracer(context, x, y, spriteY, color) {
     const g = context.scene.add.graphics();
     g.setDepth(spriteY + context.scene.height);
     g.fillStyle(color, 1);
-    g.fillRect(x, y, 1, 1);
+    g.fillRect(x, y, 1, 2);
     context.tracers.push({ x, y, alpha: 1, graphics: g });
 }
 
@@ -111,7 +111,7 @@ export function updateTracers(context, delta, {
         } else {
             tracer.graphics.clear();
             tracer.graphics.fillStyle(tracerColor, tracer.alpha);
-            tracer.graphics.fillRect(tracer.x, tracer.y, 1, 1); // Slightly taller to close gaps
+            tracer.graphics.fillRect(tracer.x, tracer.y, 1, 2); // Slightly taller to close gaps
         }
     }
 }
@@ -128,7 +128,7 @@ export function updateRubberMarks(instance, delta, config = {}) {
 
     // === Detect braking ===
     const isBraking = isHero
-        ? instance.downMove && !instance.isJumping
+        ? (instance.downMove && !instance.isJumping) || (instance.isDrifting && !instance.isJumping)
         : instance.currentVelocity.y > backwardThreshold;
 
     if (isHero) {

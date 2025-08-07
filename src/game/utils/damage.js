@@ -29,6 +29,10 @@ export function applyDamage({
         target.scene.soundObj.bulletHit1.play();
     }
 
+    if (isHero) {
+        scene.cameras.main.shake(150, 0.005);
+    }
+
     // === Damage Amount Display ===
     const camera = scene.cameras.main;
     const screenX = target.bodySprite.x - camera.scrollX;

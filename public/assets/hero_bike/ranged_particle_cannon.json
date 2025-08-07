@@ -894,6 +894,134 @@
     "spriteSourceSize": { "x": 26, "y": 4, "w": 14, "h": 14 },
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
+   },
+   "112": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "113": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "114": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "115": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "116": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "117": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "118": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "119": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "120": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "121": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "122": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "123": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "124": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "125": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "126": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "127": {
+    "frame": { "x": 54, "y": 13, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
    }
  },
  "meta": {
@@ -945,7 +1073,9 @@
    { "name": "hero_bike_ranged_particle_cannon_left_turn_left_melee_fast_attack", "from": 95, "to": 98, "direction": "forward", "color": "#000000ff" },
    { "name": "hero_bike_ranged_particle_cannon_dash_attack", "from": 99, "to": 106, "direction": "forward", "color": "#000000ff" },
    { "name": "hero_bike_ranged_particle_cannon_death", "from": 107, "to": 108, "direction": "forward", "color": "#000000ff" },
-   { "name": "hero_bike_ranged_particle_cannon_death_loop", "from": 109, "to": 111, "direction": "forward", "color": "#000000ff" }
+   { "name": "hero_bike_ranged_particle_cannon_death_loop", "from": 109, "to": 111, "direction": "forward", "color": "#000000ff" },
+   { "name": "hero_bike_ranged_particle_cannon_left_turn_spin", "from": 112, "to": 119, "direction": "forward", "color": "#000000ff" },
+   { "name": "hero_bike_ranged_particle_cannon_right_turn_spin", "from": 120, "to": 127, "direction": "forward", "color": "#000000ff" }
   ],
   "layers": [
    { "name": "ranged_particle_cannon", "opacity": 255, "blendMode": "normal" }
