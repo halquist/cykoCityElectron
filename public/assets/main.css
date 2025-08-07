@@ -51,7 +51,7 @@ canvas {
     background: linear-gradient(
         to top, 
         transparent 3px,
-        rgba(255, 255, 255, .8) 2px 
+        rgba(0, 0, 0, .8) 2px 
     );
     background-size: 100% calc(100vh / 180); /* 180 lines over the full height */
-  }
+}

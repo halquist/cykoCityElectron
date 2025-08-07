@@ -1022,6 +1022,134 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
+   },
+   "128": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "129": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "130": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "131": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "132": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "133": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "134": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "135": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "136": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "137": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "138": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "139": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "140": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "141": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "142": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "143": {
+    "frame": { "x": 16, "y": 12, "w": 1, "h": 1 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1, "h": 1 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
    }
  },
  "meta": {
@@ -1075,7 +1203,9 @@
    { "name": "hero_bike_ranged_smg_death", "from": 107, "to": 108, "direction": "forward", "color": "#000000ff" },
    { "name": "hero_bike_ranged_smg_death_loop", "from": 109, "to": 111, "direction": "forward", "color": "#000000ff" },
    { "name": "hero_bike_ranged_smg_left_turn_spin", "from": 112, "to": 119, "direction": "forward", "color": "#000000ff" },
-   { "name": "hero_bike_ranged_smg_right_turn_spin", "from": 120, "to": 127, "direction": "forward", "color": "#000000ff" }
+   { "name": "hero_bike_ranged_smg_left_turn_spin_attack", "from": 120, "to": 127, "direction": "forward", "color": "#000000ff" },
+   { "name": "hero_bike_ranged_smg_right_turn_spin", "from": 128, "to": 135, "direction": "forward", "color": "#000000ff" },
+   { "name": "hero_bike_ranged_smg_right_turn_spin_attack", "from": 136, "to": 143, "direction": "forward", "color": "#000000ff" }
   ],
   "layers": [
    { "name": "ranged_smg", "opacity": 255, "blendMode": "normal" }

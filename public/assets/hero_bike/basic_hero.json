@@ -960,6 +960,70 @@
     "duration": 100
    },
    "120": {
+    "frame": { "x": 64, "y": 83, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 13, "y": 4, "w": 10, "h": 8 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "121": {
+    "frame": { "x": 52, "y": 20, "w": 9, "h": 10 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 4, "w": 9, "h": 10 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "122": {
+    "frame": { "x": 53, "y": 84, "w": 8, "h": 10 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 13, "y": 5, "w": 8, "h": 10 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "123": {
+    "frame": { "x": 79, "y": 20, "w": 10, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 13, "y": 5, "w": 10, "h": 9 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "124": {
+    "frame": { "x": 75, "y": 85, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 6, "w": 10, "h": 8 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "125": {
+    "frame": { "x": 90, "y": 22, "w": 9, "h": 10 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 13, "y": 4, "w": 9, "h": 10 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "126": {
+    "frame": { "x": 86, "y": 85, "w": 8, "h": 10 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 16, "y": 3, "w": 8, "h": 10 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "127": {
+    "frame": { "x": 32, "y": 51, "w": 10, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 5, "w": 10, "h": 9 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "128": {
     "frame": { "x": 95, "y": 85, "w": 10, "h": 8 },
     "rotated": false,
     "trimmed": true,
@@ -967,7 +1031,7 @@
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
    },
-   "121": {
+   "129": {
     "frame": { "x": 31, "y": 31, "w": 9, "h": 10 },
     "rotated": false,
     "trimmed": true,
@@ -975,7 +1039,7 @@
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
    },
-   "122": {
+   "130": {
     "frame": { "x": 18, "y": 90, "w": 8, "h": 10 },
     "rotated": false,
     "trimmed": true,
@@ -983,7 +1047,7 @@
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
    },
-   "123": {
+   "131": {
     "frame": { "x": 41, "y": 31, "w": 10, "h": 9 },
     "rotated": false,
     "trimmed": true,
@@ -991,7 +1055,7 @@
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
    },
-   "124": {
+   "132": {
     "frame": { "x": 27, "y": 90, "w": 10, "h": 8 },
     "rotated": false,
     "trimmed": true,
@@ -999,7 +1063,7 @@
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
    },
-   "125": {
+   "133": {
     "frame": { "x": 63, "y": 31, "w": 9, "h": 10 },
     "rotated": false,
     "trimmed": true,
@@ -1007,7 +1071,7 @@
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
    },
-   "126": {
+   "134": {
     "frame": { "x": 100, "y": 22, "w": 8, "h": 10 },
     "rotated": false,
     "trimmed": true,
@@ -1015,7 +1079,71 @@
     "sourceSize": { "w": 42, "h": 20 },
     "duration": 100
    },
-   "127": {
+   "135": {
+    "frame": { "x": 83, "y": 33, "w": 10, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 5, "w": 10, "h": 9 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "136": {
+    "frame": { "x": 95, "y": 85, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 4, "w": 10, "h": 8 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "137": {
+    "frame": { "x": 31, "y": 31, "w": 9, "h": 10 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 4, "w": 9, "h": 10 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "138": {
+    "frame": { "x": 18, "y": 90, "w": 8, "h": 10 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 21, "y": 5, "w": 8, "h": 10 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "139": {
+    "frame": { "x": 41, "y": 31, "w": 10, "h": 9 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 5, "w": 10, "h": 9 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "140": {
+    "frame": { "x": 27, "y": 90, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 10, "h": 8 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "141": {
+    "frame": { "x": 63, "y": 31, "w": 9, "h": 10 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 20, "y": 4, "w": 9, "h": 10 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "142": {
+    "frame": { "x": 100, "y": 22, "w": 8, "h": 10 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 3, "w": 8, "h": 10 },
+    "sourceSize": { "w": 42, "h": 20 },
+    "duration": 100
+   },
+   "143": {
     "frame": { "x": 83, "y": 33, "w": 10, "h": 9 },
     "rotated": false,
     "trimmed": true,
@@ -1075,7 +1203,9 @@
    { "name": "hero_bike_basic_hero_death", "from": 107, "to": 108, "direction": "forward", "color": "#000000ff" },
    { "name": "hero_bike_basic_hero_death_loop", "from": 109, "to": 111, "direction": "forward", "color": "#000000ff" },
    { "name": "hero_bike_basic_hero_left_turn_spin", "from": 112, "to": 119, "direction": "forward", "color": "#000000ff" },
-   { "name": "hero_bike_basic_hero_right_turn_spin", "from": 120, "to": 127, "direction": "forward", "color": "#000000ff" }
+   { "name": "hero_bike_basic_hero_left_turn_spin_attack", "from": 120, "to": 127, "direction": "forward", "color": "#000000ff" },
+   { "name": "hero_bike_basic_hero_right_turn_spin", "from": 128, "to": 135, "direction": "forward", "color": "#000000ff" },
+   { "name": "hero_bike_basic_hero_right_turn_spin_attack", "from": 136, "to": 143, "direction": "forward", "color": "#000000ff" }
   ],
   "layers": [
    { "name": "biker", "opacity": 255, "blendMode": "normal" }

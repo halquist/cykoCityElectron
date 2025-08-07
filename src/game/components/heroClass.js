@@ -93,7 +93,8 @@ export default class Hero {
         this.driftCooldownTime = 500;   // in milliseconds
         this.driftDecayRate = 0.002;     // velocity decay per ms
         this.driftVelocity = new Phaser.Math.Vector2();
-        this.queuedPostDriftAction = null;
+        this.isSpinAttacking = false;
+        this.spinAttackTriggered = false;
 
         // === JUMP ===
         this.jumpDuration = attr.jumpDuration ?? 800;
@@ -236,143 +237,87 @@ export default class Hero {
     }
 
     inputCheck() {
-        // === Prevent attack/shooting during drift, but allow queuing ===
-        if (this.isDrifting) {
-            const mousePressed = this.scene.mouse.leftButtonDown();
-            const gamepad = this.scene.input.gamepad.getPad(0);
-            const padPressed = gamepad && (gamepad.buttons[4]?.pressed || gamepad.buttons[5]?.pressed);
-            const meleeInputActive = mousePressed || padPressed;
-
-            const fireInput = mousePressed || gamepad?.buttons[7]?.value > 0.1;
-
-            if (!this.queuedPostDriftAction) {
-                if (this.inProjectileMode && fireInput && this.canShoot()) {
-                    this.queuedPostDriftAction = { type: "projectile" };
-                } else if (meleeInputActive && !this.isMeleeAttacking && this.canAttack()) {
-                    const currentDirection = this.getMoveState();
-                    const direction = currentDirection === "left_turn" ? 'left' : currentDirection === "right_turn" ? 'right' : 'right';
-                    this.queuedPostDriftAction = { type: "melee", direction: direction };
-                }
-            }
-
-            return; // Skip rest of inputCheck during drift
-        }
-
         const keys = this.scene.keys;
-        this.downMove = keys.S.isDown;
-        this.upMove = keys.W.isDown;
-        this.leftMove = keys.A.isDown;
-        this.rightMove = keys.D.isDown;
-        this.driftInput = keys.CTRL.isDown;
-    
         const gamepad = this.scene.input.gamepad.getPad(0);
         const threshold = 0.2;
-        let gamepadUsed = false;
+        const pointer = this.scene.mouse;
+    
+        // === Movement input ===
+        this.leftMove = keys.A.isDown;
+        this.rightMove = keys.D.isDown;
+        this.upMove = keys.W.isDown;
+        this.downMove = keys.S.isDown;
     
         if (gamepad) {
-            const axisH = gamepad.axes.length > 0 ? gamepad.axes[0].getValue() : 0;
-            const axisV = gamepad.axes.length > 1 ? gamepad.axes[1].getValue() : 0;
-    
-            const anyButtonPressed = gamepad.buttons.some(b => b?.pressed || b?.value > 0.1);
-            gamepadUsed ||= Math.abs(axisH) > threshold || Math.abs(axisV) > threshold;
-            gamepadUsed ||= anyButtonPressed;
-    
-            this.leftTrigger = gamepad.buttons[6]?.value > 0.1;
+            const axisH = gamepad.axes[0]?.getValue() || 0;
+            const axisV = gamepad.axes[1]?.getValue() || 0;
     
             this.leftMove ||= axisH < -threshold;
             this.rightMove ||= axisH > threshold;
             this.upMove ||= axisV < -threshold;
             this.downMove ||= axisV > threshold;
+    
+            this.leftTrigger = gamepad.buttons[6]?.value > 0.1;
         }
     
-        this.usingGamepad = gamepadUsed;
+        // === Drift input: CTRL key or gamepad B button ===
+        this.driftInput = keys.CTRL.isDown || gamepad?.buttons[1]?.pressed;
+    
+        // === Determine input source ===
+        this.usingGamepad = !!gamepad && (
+            gamepad.axes.some(a => Math.abs(a.getValue()) > threshold) ||
+            gamepad.buttons.some(b => b?.pressed || b?.value > 0.1)
+        );
+    
+        // === Input mode visuals ===
         this.scene.input.mouse.disableContextMenu();
         this.scene.input.manager.canvas.style.cursor = this.usingGamepad ? "none" : "default";
     
-        const pointer = this.scene.mouse;
+        // === Ranged mode ===
         const rightMouse = pointer.rightButtonDown();
         this.inProjectileMode = this.usingGamepad ? this.leftTrigger : rightMouse;
     
-        const mousePressed = pointer.leftButtonDown();
-        const padPressed =
-            gamepad &&
-            (gamepad.buttons[4]?.pressed || gamepad.buttons[5]?.pressed);
-    
+        // === Firing ===
         const fireInput = pointer.leftButtonDown() || gamepad?.buttons[7]?.value > 0.1;
-    
-        if (this.inProjectileMode && fireInput && this.currentRangedWeapon.currentAmmo <= 0) {
-            const sound = this.scene.soundObj.emptyGun1;
-            if (!sound.isPlaying) {
-                sound.play();
+        if (this.inProjectileMode && fireInput) {
+            if (this.currentRangedWeapon.currentAmmo <= 0) {
+                const emptySound = this.scene.soundObj.emptyGun1;
+                if (!emptySound.isPlaying) emptySound.play();
+            } else if (this.canShoot()) {
+                this.fireProjectileAtCursor();
             }
-        } else if (this.inProjectileMode && fireInput && this.canShoot()) {
-            this.fireProjectileAtCursor();
         }
     
+        // === Reload ===
         const reloadInput = this.usingGamepad ? gamepad?.buttons[2]?.pressed : keys.R.isDown;
-        if (reloadInput && !this.prevReloadInput) {
-            this.reload();
-        }
+        if (reloadInput && !this.prevReloadInput) this.reload();
         this.prevReloadInput = reloadInput;
     
-        const meleeKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
-        const dpadLeftPressed = gamepad?.left && !this.prevDpadState.left;
-        const dpadRightPressed = gamepad?.right && !this.prevDpadState.right;
-        if (Phaser.Input.Keyboard.JustDown(meleeKey) || dpadRightPressed) {
-            this.cycleMeleeWeapon(1);
-        } else if (dpadLeftPressed) {
-            this.cycleMeleeWeapon(-1);
-        }
-    
-        const rangedKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
-        const dpadUpPressed = gamepad?.up && !this.prevDpadState.up;
-        const dpadDownPressed = gamepad?.down && !this.prevDpadState.down;
-        if (Phaser.Input.Keyboard.JustDown(rangedKey) || dpadDownPressed) {
-            this.cycleRangedWeapon(1);
-        } else if (dpadUpPressed) {
-            this.cycleRangedWeapon(-1);
-        }
-    
-        if (gamepad) {
-            this.prevDpadState.left = gamepad.left;
-            this.prevDpadState.right = gamepad.right;
-            this.prevDpadState.up = gamepad.up;
-            this.prevDpadState.down = gamepad.down;
-        }
-    
-        const dashInput = this.usingGamepad ? gamepad?.buttons[0]?.pressed : keys.SPACE.isDown;
-        if (dashInput && !this.prevDashInput && !this.isDashing && !this.dashCooldown) {
-            this.startDashAttack();
-        }
-        this.prevDashInput = dashInput;
-    
+        // === Melee input ===
+        const mousePressed = pointer.leftButtonDown();
+        const padPressed = gamepad?.buttons[4]?.pressed || gamepad?.buttons[5]?.pressed;
         const meleeInputActive = mousePressed || padPressed;
     
-        // Detect melee input start
         if (meleeInputActive && !this.meleeInputActive && !this.isMeleeAttacking && this.canAttack()) {
             this.meleeInputActive = true;
             this.meleeHoldStartTime = this.scene.time.now;
-
-            // 🡺 Determine attack direction at press time
+    
             if (this.usingGamepad) {
-                const gamepad = this.scene.input.gamepad.getPad(0);
-                const leftPressed = gamepad?.buttons[4]?.pressed;
-                const rightPressed = gamepad?.buttons[5]?.pressed;
-                this.pendingMeleeDirection = rightPressed ? 'right' : leftPressed ? 'left' : 'right'; // fallback to right
+                const left = gamepad?.buttons[4]?.pressed;
+                const right = gamepad?.buttons[5]?.pressed;
+                this.pendingMeleeDirection = right ? 'right' : left ? 'left' : 'right';
             } else {
-                this.pendingMeleeDirection = this.scene.mouse.worldX > this.bodySprite.x ? 'right' : 'left';
+                this.pendingMeleeDirection = pointer.worldX > this.bodySprite.x ? 'right' : 'left';
             }
         }
     
-        // Detect melee input release
         if (!meleeInputActive && this.meleeInputActive && !this.isMeleeAttacking && this.canAttack()) {
-            const heldDuration = this.scene.time.now - this.meleeHoldStartTime;
-            const attackType = heldDuration >= this.meleeChargeThreshold ? "strong" : "fast";
+            const held = this.scene.time.now - this.meleeHoldStartTime;
+            const attackType = held >= this.meleeChargeThreshold ? "strong" : "fast";
             this.executeMeleeAttack(attackType);
             this.meleeInputActive = false;
         }
     
-        // Optional: Auto-trigger strong attack if held long enough
         if (
             this.meleeInputActive &&
             !this.isMeleeAttacking &&
@@ -385,33 +330,64 @@ export default class Hero {
             this.meleeInputActive = false;
         }
     
-        if (!meleeInputActive) {
-            this.strongAttackTriggered = false;
+        if (!meleeInputActive) this.strongAttackTriggered = false;
+    
+        // === Weapon switching ===
+        const meleeKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        const rangedKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+    
+        const dpadLeft = gamepad?.left && !this.prevDpadState.left;
+        const dpadRight = gamepad?.right && !this.prevDpadState.right;
+        const dpadUp = gamepad?.up && !this.prevDpadState.up;
+        const dpadDown = gamepad?.down && !this.prevDpadState.down;
+    
+        if (Phaser.Input.Keyboard.JustDown(meleeKey) || dpadRight) {
+            this.cycleMeleeWeapon(1);
+        } else if (dpadLeft) {
+            this.cycleMeleeWeapon(-1);
         }
-
-        // if (this.driftInput && (this.leftMove || this.rightMove) && !this.isJumping) {
-        //     this.isDrifting = true;
-        //     this.driftTimer = this.maxDriftTime;
-        //     this.driftDirection = this.leftMove ? -1 : 1;
-        //     const side = this.driftDirection === -1 ? 'left' : 'right';
-        //     spawnSparks(this, this.bodySprite.x, this.bodySprite.y, side, () => this.bikeSprite.depth + 1);
-        // }
-
-        if (this.driftInput && !this.isDrifting && this.driftCooldown <= 0) {
+    
+        if (Phaser.Input.Keyboard.JustDown(rangedKey) || dpadDown) {
+            this.cycleRangedWeapon(1);
+        } else if (dpadUp) {
+            this.cycleRangedWeapon(-1);
+        }
+    
+        if (gamepad) {
+            this.prevDpadState.left = gamepad.left;
+            this.prevDpadState.right = gamepad.right;
+            this.prevDpadState.up = gamepad.up;
+            this.prevDpadState.down = gamepad.down;
+        }
+    
+        // === Dash ===
+        const dashInput = this.usingGamepad ? gamepad?.buttons[0]?.pressed : keys.SPACE.isDown;
+        if (dashInput && !this.prevDashInput && !this.isDashing && !this.dashCooldown) {
+            this.startDashAttack();
+        }
+        this.prevDashInput = dashInput;
+    
+        // === Drift ===
+        const canStartDrift = this.driftInput && !this.isDrifting && this.driftCooldown <= 0 && !this.isReloading && !this.isDashing;
+        if (canStartDrift) {
             this.isDrifting = true;
             this.driftTimer = this.maxDriftTime;
+    
             const sound = this.scene.soundObj.tireSkid1;
-            if (!sound.isPlaying) {
-                sound.play();
-            }
-        
-            // Use current movement direction or input
+            if (!sound.isPlaying) sound.play();
+    
             const direction = new Phaser.Math.Vector2(
                 (this.leftMove ? -1 : 0) + (this.rightMove ? 1 : 0),
                 0
             ).normalize();
-        
-            this.driftVelocity = direction.scale(this.horzMoveSpeed * 2.5); // or custom value
+            this.driftVelocity = direction.scale(this.horzMoveSpeed * 2.5);
+    
+            if (meleeInputActive && this.canAttack()) {
+                this.isSpinAttacking = true;
+                this.spinAttackTriggered = false;
+            }
+    
+            return;
         }
     }
 
@@ -472,7 +448,11 @@ export default class Hero {
         }
 
         // === Drifting Animation ===
-        if (this.isDrifting) {
+        if (this.isDrifting && this.isSpinAttacking) {
+            const animKey = `${moveState}_spin_attack`;
+            this.playAnimation(animKey, true);
+            return;
+        } else if (this.isDrifting) {
             const animKey = `${moveState}_spin`;
             this.playAnimation(animKey, true);
             return;
@@ -600,6 +580,11 @@ export default class Hero {
 
         if (this.isDrifting) {
             this.driftTimer -= delta;
+
+            if (this.isSpinAttacking && !this.spinAttackTriggered) {
+                this.executeMeleeAttack("spin");
+                this.spinAttackTriggered = true;
+            }
         
             // Subtle vertical influence
             const verticalInfluence = this.upMove ? -0.15 : this.downMove ? 0.15 : 0;
@@ -617,6 +602,8 @@ export default class Hero {
                 this.isDrifting = false;
                 this.driftCooldown = this.driftCooldownTime;
                 this.driftVelocity.set(0, 0);
+                this.isSpinAttacking = false;
+                this.spinAttackTriggered = false;
             
                 // 🡺 Trigger queued action, if any
                 if (this.queuedPostDriftAction) {
@@ -731,37 +718,61 @@ export default class Hero {
         });
     };
 
-    spawnMeleeSensor() {
-        const offsetX = this.meleeAttackDirection === 'left' ? -12 : 12;
-        const width = this.currentMeleeWeapon.damageSensorWidth ?? 10;
-        const height = this.currentMeleeWeapon.damageSensorHeight ?? 10;
-        const sensor = this.scene.matter.add.rectangle(
-            this.bodySprite.x + offsetX,
-            this.bodySprite.y, 
-            width, 
-            height, 
-            {
+    spawnMeleeSensor(type = "fast") {
+        const weapon = this.currentMeleeWeapon;
+        const config = weapon.attacks[type];
+        
+        let sensor;
+        let offsetX = 0;
+        let offsetY = 0;
+    
+        const commonSensorOptions = {
             isSensor: true,
-                collisionFilter: { 
-                    category: this.scene.categoryHeroSensor,
-                    mask: this.scene.categoryEnemy | this.scene.categoryObstacle // only hit the enemy
-                }
-            });
-        sensor.label = 'heroMeleeSensor';
+            collisionFilter: {
+                category: this.scene.categoryHeroSensor,
+                mask: this.scene.categoryEnemy | this.scene.categoryObstacle
+            }
+        };
+    
+        if (type === "spin") {
+            const radius = config.radius ?? 16;
+            sensor = this.scene.matter.add.circle(
+                this.bodySprite.x,
+                this.bodySprite.y,
+                radius,
+                commonSensorOptions
+            );
+            sensor.label = 'heroSpinSensor';
+        } else {
+            offsetX = this.meleeAttackDirection === 'left' ? -12 : 12;
+            const width = config.width ?? 10;
+            const height = config.height ?? 10;
+    
+            sensor = this.scene.matter.add.rectangle(
+                this.bodySprite.x + offsetX,
+                this.bodySprite.y,
+                width,
+                height,
+                commonSensorOptions
+            );
+            sensor.label = 'heroMeleeSensor';
+        }
+    
         sensor._owner = this;
         sensor._offsetX = offsetX;
-        sensor._offsetY = 0;
+        sensor._offsetY = offsetY;
     
-        this.scene.activeMeleeSensors.set(sensor, this); // store attacker
+        this.scene.activeMeleeSensors.set(sensor, this);
         this.activeMeleeSensors.push(sensor);
-    
-        this.scene.time.delayedCall(100, () => {
+        this.scene.time.delayedCall(config.sensorLifetime || 100, () => {
             this.scene.matter.world.remove(sensor);
             this.scene.activeMeleeSensors.delete(sensor);
             const i = this.activeMeleeSensors.indexOf(sensor);
             if (i !== -1) this.activeMeleeSensors.splice(i, 1);
         });
     }
+    
+    
 
     updateMeleeSensors() {
         for (const sensor of this.activeMeleeSensors) {

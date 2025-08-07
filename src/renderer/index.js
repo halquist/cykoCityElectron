@@ -21,6 +21,7 @@ const config = {
     matter: {
       enableSleep: true,
       gravity: false,
+      // debug: true
       // fps: 120,
       // timeScale: 1,          // Default speed
       // positionIterations: 6, // Optional: improve collision resolution

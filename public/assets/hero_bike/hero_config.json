@@ -25,7 +25,8 @@
                     "damageDelay": 200,
                     "soundDelay": 0.2,
                     "cooldown": 500,
-                    "knockback": 0.8
+                    "knockback": 0.8,
+                    "sensorLifetime": 100
                 },
                 "strong": {
                     "damageMin": 20,
@@ -33,7 +34,18 @@
                     "damageDelay": 500,
                     "soundDelay": 0.4,
                     "cooldown": 800,
-                    "knockback": 1.3
+                    "knockback": 1.3,
+                    "sensorLifetime": 100
+                },
+                "spin": {
+                    "damageMin": 20,
+                    "damageMax": 30,
+                    "damageDelay": 100,
+                    "soundDelay": 0.4,
+                    "cooldown": 800,
+                    "knockback": 0.8,
+                    "sensorLifetime": 600,
+                    "radius": 16
                 }
             }
         },
@@ -49,7 +61,8 @@
                     "damageDelay": 200,
                     "soundDelay": 0.2,
                     "cooldown": 900,
-                    "knockback": 1.1
+                    "knockback": 1.1,
+                    "sensorLifetime": 100
                 },
                 "strong": {
                     "damageMin": 25,
@@ -57,7 +70,18 @@
                     "damageDelay": 500,
                     "soundDelay": 0.4,
                     "cooldown": 1500,
-                    "knockback": 1.5
+                    "knockback": 1.5,
+                    "sensorLifetime": 100
+                },
+                "spin": {
+                    "damageMin": 25,
+                    "damageMax": 45,
+                    "damageDelay": 100,
+                    "soundDelay": 0.4,
+                    "cooldown": 800,
+                    "knockback": 0.8,
+                    "sensorLifetime": 600,
+                    "radius": 16
                 }
             }
         }
