@@ -60,6 +60,7 @@ export function applyDamage({
     }
 
     target.damageCooldownTimer = target.damageCooldown;
+    target.damageAttackCooldownTimer = target.damageAttackCooldown;
 }
 
 function showDamageAmount(scene, x, y, damageAmount, type = null) {

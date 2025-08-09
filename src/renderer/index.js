@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 const { Scene, AUTO } = Phaser;
-import cykoCityTest from "../game/scenes/back_alley_battleground.js"
+import MainMenu from "../game/scenes/MainMenu.js"
+import GangCamp from "../game/scenes/GangCamp.js"
+import TestLevel from "../game/scenes/back_alley_battleground.js"
 
 const width = 320
 const height = 180
@@ -58,7 +60,11 @@ const config = {
   expandParent: true,
   gameTitle: "CYKO CITY",
   gameVerson: 0.1,
-  scene: cykoCityTest,
+  scene: [
+    MainMenu,
+    GangCamp,
+    TestLevel
+  ],
 }
 
 const game = new Phaser.Game(config)

@@ -53,7 +53,7 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
   
       this.x += moveX * this.speed * dt;
       this.y += moveY * this.speed * dt;
-  
+      
       // Clamp to screen bounds
       this.x = Phaser.Math.Clamp(this.x, this.cursorBounds.xMin, this.cursorBounds.xMax);
       this.y = Phaser.Math.Clamp(this.y, this.cursorBounds.yMin, this.cursorBounds.yMax);
@@ -61,6 +61,7 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
       this.x = this.scene.input.activePointer.worldX;
       this.y = this.scene.input.activePointer.worldY;
     }
+    console.log(this.x, this.y)
   }
 
   playAnimation(animKey) {

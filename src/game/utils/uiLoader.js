@@ -25,8 +25,8 @@ export const uiCreator = (scene) => {
 
   scene.cursor = new Cursor({
     scene: scene,
-    x: scene.middleX,
-    y: scene.middley,
+    x: 0,
+    y: 0,
     key: "cursor",
   })
 

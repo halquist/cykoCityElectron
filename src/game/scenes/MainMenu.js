@@ -1,28 +1,34 @@
-import { Scene } from 'phaser';
+import Phaser from "phaser";
+import Cursor from "../components/cursorClass.js"
 
-export class MainMenu extends Scene
-{
-    constructor ()
-    {
-        super('MainMenu');
+export default class MainMenu extends Phaser.Scene {
+    constructor() {
+        super({ key: 'MainMenu' });
     }
 
-    create ()
-    {
-        this.add.image(512, 384, 'background');
+    preload() {
+        this.load.image('menu_bg', 'assets/menu/main_splash_image_test.png');
+        this.load.aseprite("cursor", "assets/ui/target_cursor.png", "assets/ui/target_cursor.json");
+    }
 
-        this.add.image(512, 300, 'logo');
+    create() {
+        this.anims.createFromAseprite('cursor');
+        this.cursor = new Cursor({
+            scene: this,
+            x: 0,
+            y: 0,
+            key: "cursor",
+          })
 
-        this.add.text(512, 460, 'Main Menu', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5);
+        this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'menu_bg')
+        .setOrigin(0.5, 0.5)
+        .setInteractive()
+            .on('pointerdown', () => {
+                this.scene.start('GangCamp');
+            });
+    }
 
-        this.input.once('pointerdown', () => {
-
-            this.scene.start('Game');
-
-        });
+    update(time, delta) {
+        this.cursor.update(delta);
     }
 }

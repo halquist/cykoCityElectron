@@ -1,0 +1,56 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 0, "y": 0, "w": 55, "h": 53 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 55, "h": 53 },
+    "sourceSize": { "w": 55, "h": 53 },
+    "duration": 100
+   },
+   "1": {
+    "frame": { "x": 56, "y": 0, "w": 55, "h": 53 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 55, "h": 53 },
+    "sourceSize": { "w": 55, "h": 53 },
+    "duration": 100
+   },
+   "2": {
+    "frame": { "x": 0, "y": 54, "w": 55, "h": 53 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 55, "h": 53 },
+    "sourceSize": { "w": 55, "h": 53 },
+    "duration": 100
+   },
+   "3": {
+    "frame": { "x": 56, "y": 54, "w": 55, "h": 53 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 55, "h": 53 },
+    "sourceSize": { "w": 55, "h": 53 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.14.4-x64",
+  "image": "gang_hang.png",
+  "format": "I8",
+  "size": { "w": 111, "h": 107 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "gang_hang_anim", "from": 0, "to": 3, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Gang Hang" },
+   { "name": "barrel_illumination", "group": "Gang Hang", "opacity": 255, "blendMode": "normal" },
+   { "name": "barrel_illumination Copy", "group": "Gang Hang", "opacity": 255, "blendMode": "normal" },
+   { "name": "seats", "group": "Gang Hang", "opacity": 255, "blendMode": "normal" },
+   { "name": "Dealer", "group": "Gang Hang", "opacity": 255, "blendMode": "normal" },
+   { "name": "barrel", "group": "Gang Hang", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

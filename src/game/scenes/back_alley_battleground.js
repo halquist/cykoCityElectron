@@ -18,9 +18,9 @@ import { readFileSync } from 'fs';
 const width = 320;
 const height = 180;
 
-class CykoCityTest extends Phaser.Scene {
+export default class TestLevel extends Phaser.Scene {
     constructor() {
-        super({ key: 'CykoCityTest', physics: { matter: { gravity: { y: 0 } } } });
+        super({ key: 'TestLevel', physics: { matter: { gravity: { y: 0 } } } });
         this.width = width;
         this.height = height;
     }
@@ -341,5 +341,3 @@ class CykoCityTest extends Phaser.Scene {
         this.displayScrollSpeed += (this.scrollSpeed - this.displayScrollSpeed) * smoothing;
     }
 }
-
-export default CykoCityTest;

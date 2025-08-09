@@ -63,6 +63,8 @@ export default class Enemy {
         this.deathAnimPlayed = false;
         this.damageCooldown = 100;
         this.damageCooldownTimer = 0;
+        this.damageAttackCooldown = 1000;
+        this.damageAttackCooldownTimer = 0;
         this.activeMeleeSensors = [];
         
         this.currentVelocity = new Phaser.Math.Vector2(0, 0);
@@ -583,7 +585,7 @@ export default class Enemy {
     }
 
     canAttack() {
-        return this.damageCooldownTimer <= 0 && !this.isDead;
+        return this.damageAttackCooldownTimer <= 0 && !this.isDead;
     }
 
     update(time, delta) {
@@ -594,6 +596,9 @@ export default class Enemy {
     
         if (this.damageCooldownTimer > 0) {
             this.damageCooldownTimer -= delta;
+        }
+        if (this.damageAttackCooldownTimer > 0) {
+            this.damageAttackCooldownTimer -= delta;
         }
 
         if (this.health <= this.exhaustThreshold) {

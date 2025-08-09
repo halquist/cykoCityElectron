@@ -1,0 +1,57 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 0, "y": 0, "w": 58, "h": 40 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 58, "h": 40 },
+    "sourceSize": { "w": 58, "h": 40 },
+    "duration": 100
+   },
+   "1": {
+    "frame": { "x": 59, "y": 0, "w": 58, "h": 40 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 58, "h": 40 },
+    "sourceSize": { "w": 58, "h": 40 },
+    "duration": 100
+   },
+   "2": {
+    "frame": { "x": 0, "y": 41, "w": 58, "h": 40 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 58, "h": 40 },
+    "sourceSize": { "w": 58, "h": 40 },
+    "duration": 100
+   },
+   "3": {
+    "frame": { "x": 59, "y": 41, "w": 58, "h": 40 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 58, "h": 40 },
+    "sourceSize": { "w": 58, "h": 40 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.14.4-x64",
+  "image": "clinik.png",
+  "format": "I8",
+  "size": { "w": 117, "h": 81 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "clinik_anim", "from": 0, "to": 3, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "clinic" },
+   { "name": "illumination", "group": "clinic", "opacity": 255, "blendMode": "normal" },
+   { "name": "illumination Copy", "group": "clinic", "opacity": 255, "blendMode": "normal" },
+   { "name": "tools", "group": "clinic", "opacity": 255, "blendMode": "normal" },
+   { "name": "gurney", "group": "clinic", "opacity": 255, "blendMode": "normal" },
+   { "name": "biowaste", "group": "clinic", "opacity": 255, "blendMode": "normal" },
+   { "name": "dok", "group": "clinic", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

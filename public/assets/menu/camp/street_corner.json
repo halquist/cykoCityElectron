@@ -1,0 +1,57 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 0, "y": 0, "w": 45, "h": 58 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 45, "h": 58 },
+    "sourceSize": { "w": 45, "h": 58 },
+    "duration": 100
+   },
+   "1": {
+    "frame": { "x": 46, "y": 0, "w": 45, "h": 58 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 45, "h": 58 },
+    "sourceSize": { "w": 45, "h": 58 },
+    "duration": 100
+   },
+   "2": {
+    "frame": { "x": 0, "y": 59, "w": 45, "h": 58 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 45, "h": 58 },
+    "sourceSize": { "w": 45, "h": 58 },
+    "duration": 100
+   },
+   "3": {
+    "frame": { "x": 46, "y": 59, "w": 45, "h": 58 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 45, "h": 58 },
+    "sourceSize": { "w": 45, "h": 58 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.14.4-x64",
+  "image": "street_corner.png",
+  "format": "I8",
+  "size": { "w": 91, "h": 117 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "street_corner_anim", "from": 0, "to": 3, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "street corner" },
+   { "name": "illumination", "group": "street corner", "opacity": 255, "blendMode": "normal" },
+   { "name": "illumination Copy", "group": "street corner", "opacity": 255, "blendMode": "normal" },
+   { "name": "light", "group": "street corner", "opacity": 255, "blendMode": "normal" },
+   { "name": "cans", "group": "street corner", "opacity": 255, "blendMode": "normal" },
+   { "name": "cat Copy", "group": "street corner", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 7", "group": "street corner", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
