@@ -2,8 +2,8 @@ import Phaser from "phaser";
 import uiLoader, { uiCreator, uiUpdate } from "../utils/uiLoader.js";
 import { inputSetup, inputCheck } from "../utils/inputSetup.js";
 import soundLoader, { soundCreator } from "../utils/soundLoader.js";
-import SoundtrackManager from "../utils/soundtrackManager.js";
-import soundtrackList from "../../../public/assets/music/soundtrack.json";
+// import SoundtrackManager from "../utils/soundtrackManager.js";
+// import soundtrackList from "../../../public/assets/music/soundtrack.json";
 import heroClass from "../components/heroClass.js";
 import enemyClass from "../components/enemyClass.js"
 import ObstacleManager from "../components/obstacleManagerClass.js";
@@ -31,8 +31,8 @@ export default class TestLevel extends Phaser.Scene {
         
 
         uiLoader(this);
-        this.soundtrackManager = new SoundtrackManager(this);
-        this.soundtrackManager.loader(soundtrackList);
+        // this.soundtrackManager = new SoundtrackManager(this);
+        // this.soundtrackManager.loader(soundtrackList);
 
         soundLoader(this);
         this.textures.get('key').setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -45,8 +45,8 @@ export default class TestLevel extends Phaser.Scene {
 
         // this.sound.context.resume();
 
-        this.soundtrackManager.create(soundtrackList);
-        this.soundtrackManager.play({ shuffle: true, volume: 0.6 });
+        // this.soundtrackManager.create(soundtrackList);
+        this.game.soundtrackManager.play({ shuffle: true, volume: 0.6, category: 'background' });
 
         this.soundObj = {};
 

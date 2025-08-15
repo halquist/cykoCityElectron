@@ -2,7 +2,13 @@
     font-family: 'pixelFont';
     src: url('fonts/warboundpixel.ttf') format("truetype");
     font-display: block;
-  }
+}
+
+@font-face {
+    font-family: 'titleFont';
+    src: url('fonts/early_gameboy.ttf') format('truetype');
+    font-display: block;
+}
 
 html {
     background-color: rgb(0, 8, 15);

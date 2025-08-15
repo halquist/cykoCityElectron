@@ -123,6 +123,17 @@ class SoundtrackManager {
         }
     }
 
+    fadeOut() {
+        this.scene.tweens.add({
+            targets: this.scene.sound.sounds, // array of all sounds
+            volume: 0,
+            duration: 200,
+            onComplete: () => {
+                this.scene.sound.stopAll();
+            }
+        });
+    }
+
     // Stop all songs
     stop() {
         for (let category in this.songs) {

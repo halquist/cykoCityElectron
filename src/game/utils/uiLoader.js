@@ -1,7 +1,7 @@
 import Cursor from "../components/cursorClass.js"
 
 const uiLoader = (scene) => {
-  scene.load.aseprite("cursor", "assets/ui/target_cursor.png", "assets/ui/target_cursor.json");
+  scene.load.aseprite("target_cursor", "assets/ui/target_cursor.png", "assets/ui/target_cursor.json");
   scene.load.aseprite("death_message", "assets/ui/death_message.png", "assets/ui/death_message.json");
   scene.load.image('ui_base', 'assets/ui/ui_base.png');
   scene.load.image('health_bar_highlights', 'assets/ui/health_bar_highlights.png');
@@ -19,7 +19,7 @@ const uiLoader = (scene) => {
 }
 
 export const uiCreator = (scene) => {
-  scene.anims.createFromAseprite('cursor');
+  scene.anims.createFromAseprite('target_cursor');
   scene.anims.createFromAseprite('ranged_reload');
   scene.anims.createFromAseprite('death_message');
 
@@ -27,7 +27,7 @@ export const uiCreator = (scene) => {
     scene: scene,
     x: 0,
     y: 0,
-    key: "cursor",
+    key: "target_cursor",
   })
 
   scene.mouse = scene.input.mousePointer

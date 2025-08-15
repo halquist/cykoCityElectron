@@ -170,6 +170,7 @@ export default class Enemy {
             );
             return;
         } else if (distToHero < 160 && this.hasRangedAttack && !this.isRangedAttacking && this.canAttack()) {
+            console.log("ranged attacking!")
             this.state = 'attack';
             this.isRangedAttacking = true;
             this.rangedAttackTimer = 0;

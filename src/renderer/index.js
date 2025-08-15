@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 const { Scene, AUTO } = Phaser;
 import MainMenu from "../game/scenes/MainMenu.js"
 import GangCamp from "../game/scenes/GangCamp.js"
+import MenuOverlay from '../../public/assets/menu/MenuOverlay.js';
 import TestLevel from "../game/scenes/back_alley_battleground.js"
 
 const width = 320
@@ -63,6 +64,7 @@ const config = {
   scene: [
     MainMenu,
     GangCamp,
+    MenuOverlay,
     TestLevel
   ],
 }

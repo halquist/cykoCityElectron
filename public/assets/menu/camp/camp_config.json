@@ -4,7 +4,8 @@
       "clinik": { "level": 1, "x": 183, "y": 67, "locked": true},
       "street_corner":  { "level": 1, "x": 95, "y": 171,  "locked": true },
       "cykanic":  { "level": 1, "x": 291, "y": 168 },
-      "black_market":  { "level": 1, "x": 273, "y": 65,  "locked": true }
+      "black_market":  { "level": 1, "x": 273, "y": 65,  "locked": true },
+      "ramp_entrance":  { "level": 1, "x": 31, "y": 150}
     },
     "members": [
       { 

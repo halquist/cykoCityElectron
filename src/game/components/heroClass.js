@@ -1092,7 +1092,7 @@ export default class Hero {
         // === Play Death Animation Once ===
         if (!this.deathAnimPlayed) {
             this.scene.soundObj.heroDeath.play();
-            this.scene.soundtrackManager.play({ category: "death", loop: true, volume: 0.6 });
+            this.scene.game.soundtrackManager.play({ category: "death", loop: true, volume: 0.6 });
 
             const deathAnimKey = `${this.spriteKey}_${this.bikeSprite.name}_death`;
             const sprites = [
