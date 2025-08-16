@@ -1,0 +1,40 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 0, "y": 0, "w": 170, "h": 125 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 170, "h": 125 },
+    "sourceSize": { "w": 170, "h": 125 },
+    "duration": 100
+   },
+   "1": {
+    "frame": { "x": 171, "y": 0, "w": 170, "h": 125 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 170, "h": 125 },
+    "sourceSize": { "w": 170, "h": 125 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.14.4-x64",
+  "image": "structure_menu.png",
+  "format": "I8",
+  "size": { "w": 341, "h": 125 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "structure_menu_default", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
+   { "name": "structure_menu_close", "from": 1, "to": 1, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "menu_background", "opacity": 255, "blendMode": "normal" },
+   { "name": "menu_lines", "opacity": 255, "blendMode": "normal" },
+   { "name": "screen_black", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" },
+   { "name": "exit x", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

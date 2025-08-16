@@ -2,12 +2,23 @@
 export const STRUCTURES = {
     gang_hang: {
       key: 'gang_hang',
-      displayName: 'Hangout',
+      displayName: 'Gang',
       levels: [
         { texture:'gang_hang', hitbox:{w:64,h:40,ox:0,oy:12} }
       ],
       menu: 'gang_hang_menu',
-      menuTitle: 'Gang Management',
+      menuTitle: 'Gang',
+    //   onHover: (sprite)=> sprite.setTint(0x9ad1ff),
+    //   onUnhover: (sprite)=> sprite.clearTint(),
+    },
+    crash_pad: {
+      key: 'crash_pad',
+      displayName: 'Player',
+      levels: [
+        { texture:'crash_pad', hitbox:{w:64,h:40,ox:0,oy:12} }
+      ],
+      menu: 'crash_pad_menu',
+      menuTitle: 'Player',
     //   onHover: (sprite)=> sprite.setTint(0x9ad1ff),
     //   onUnhover: (sprite)=> sprite.clearTint(),
     },
@@ -35,7 +46,7 @@ export const STRUCTURES = {
     },
     street_corner: {
         key: 'street_corner',
-        displayName: 'Street Corner',
+        displayName: 'Deala',
         levels: [
           { texture:'street_corner', hitbox:{w:64,h:40,ox:0,oy:12} }
         ],

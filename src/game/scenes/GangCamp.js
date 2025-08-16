@@ -12,13 +12,14 @@ export default class GangCamp extends Phaser.Scene {
         this.load.image('camp_bg', 'assets/menu/camp/camp_background.png');
         
         this.load.aseprite("gang_hang", "assets/menu/camp/gang_hang.png", "assets/menu/camp/gang_hang.json");
+        this.load.aseprite("crash_pad", "assets/menu/camp/crash_pad.png", "assets/menu/camp/crash_pad.json");
         this.load.aseprite("cykanic", "assets/menu/camp/cykanic.png", "assets/menu/camp/cykanic.json");
         this.load.aseprite("clinik", "assets/menu/camp/clinik.png", "assets/menu/camp/clinik.json");
         this.load.aseprite("street_corner", "assets/menu/camp/street_corner.png", "assets/menu/camp/street_corner.json");
         this.load.aseprite("black_market", "assets/menu/camp/black_market.png", "assets/menu/camp/black_market.json");
         this.load.aseprite("ramp_entrance", "assets/menu/camp/ramp_entrance.png", "assets/menu/camp/ramp_entrance.json");
         this.load.json('base_state','assets/menu/camp/camp_config.json');
-        this.load.aseprite("cursor", "assets/ui/hand_cursor.png", "assets/ui/hand_cursor.json");
+        this.load.aseprite("hand_cursor", "assets/ui/hand_cursor.png", "assets/ui/hand_cursor.json");
     }
 
     create() {
@@ -68,7 +69,7 @@ export default class GangCamp extends Phaser.Scene {
         // });
       
         // Register all Aseprite animations up front
-        ['gang_hang','cykanic','clinik','street_corner','black_market','ramp_entrance'].forEach(key => {
+        ['gang_hang','crash_pad','cykanic','clinik','street_corner','black_market','ramp_entrance'].forEach(key => {
           if (!this.anims.exists(`${key}_anim`)) {
             this.anims.createFromAseprite(key);
           }
@@ -121,7 +122,7 @@ export default class GangCamp extends Phaser.Scene {
             scene: this,
             x: 0,
             y: 0,
-            key: "cursor",
+            key: "hand_cursor",
             isMenuCursor: true
         })
 

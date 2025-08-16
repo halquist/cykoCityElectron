@@ -20,8 +20,9 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
     this.speed = 350;
 
     // optional menu anim keys
-    this.idleAnim  = `${this.key}_idle`;
-    this.clickAnim = `${this.key}_click`;
+    // this.idleAnim  = `${this.key}_idle`;
+    // this.clickAnim = `${this.key}_click`;
+    this.setFrame(0); // default frame
 
     // input state
     this.gamepad = null;
@@ -98,11 +99,9 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
     if (this.isMenuCursor) {
       const pressed = mouseDown || padAPressed;
       if (pressed) {
-        if (this.scene.anims.exists(this.clickAnim) && this.anims.getName() !== this.clickAnim) {
-          this.anims.play(this.clickAnim, true);
-        }
-      } else if (this.scene.anims.exists(this.idleAnim) && this.anims.getName() !== this.idleAnim) {
-        this.anims.play(this.idleAnim, true);
+        this.setFrame(1); // click frame
+      } else {
+        this.setFrame(0);
       }
     }
 

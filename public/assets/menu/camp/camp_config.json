@@ -1,6 +1,7 @@
 {
     "structures": {
       "gang_hang": { "level": 1, "x": 210, "y": 140},
+      "crash_pad": { "level": 1, "x": 101, "y": 81},
       "clinik": { "level": 1, "x": 183, "y": 67, "locked": true},
       "street_corner":  { "level": 1, "x": 95, "y": 171,  "locked": true },
       "cykanic":  { "level": 1, "x": 291, "y": 168 },

@@ -28,18 +28,25 @@ export default class MenuOverlay extends Phaser.Scene {
 
   preload() {
     // load any assets needed for the menu overlay
-    this.load.image('structure_menu', 'assets/menu/structure_menu.png');
+    // this.load.image('structure_menu', 'assets/menu/structure_menu.png');
+    this.load.aseprite("structure_menu", "assets/menu/structure_menu.png", "assets/menu/structure_menu.json");
+    this.load.aseprite("computer_cursor", "assets/ui/computer_cursor.png", "assets/ui/computer_cursor.json");
   }
 
   create() {
 
     this.cursor = new Cursor({
-        scene: this,
-        x: 0,
-        y: 0,
-        key: "cursor",
-        isMenuCursor: true
+      scene: this,
+      x: 0,
+      y: 0,
+      key: "computer_cursor",
+      isMenuCursor: true
     })
+
+    // if (!this.anims.exists('structure_menu_default')) {
+    //   this.anims.createFromAseprite('structure_menu');
+    // }
+
     const { width: W, height: H } = this.scale;
 
     // --- BACKDROP ---
@@ -47,11 +54,13 @@ export default class MenuOverlay extends Phaser.Scene {
     this.add.rectangle(0, 0, W, H, 0x000000, 0.4).setOrigin(0);
 
     // --- MODAL IMAGE ---
-    const modalImage = this.add.image(
+    const modalImage = this.add.sprite(
       this.cameras.main.centerX,
       this.cameras.main.centerY,
       'structure_menu'
     ).setOrigin(0.5, 0.5).setDepth(0);
+
+    modalImage.setFrame(0); // default frame
 
     // --- DERIVED POSITION & SIZE ---
     const modalX = modalImage.x - modalImage.displayWidth / 2;   // top-left X
@@ -69,11 +78,11 @@ export default class MenuOverlay extends Phaser.Scene {
 
     // --- TABS BAR ---
     const tabs = [
-      { key: 'gang',     label: 'Gang' },
-      { key: 'cykanic',  label: 'Cykanic' },
-      { key: 'dealer',   label: 'Deala' },
-      { key: 'market',   label: 'Black Market' },
-      { key: 'clinik',   label: 'Clinik' },
+      { key: 'gang', label: 'Gang' },
+      { key: 'cykanic', label: 'Cykanic' },
+      { key: 'dealer', label: 'Deala' },
+      { key: 'market', label: 'Black Market' },
+      { key: 'clinik', label: 'Clinik' },
     ];
 
     this.tabBar = new TabBar(this, modalX + 4, modalY + 14, tabs, {
@@ -115,17 +124,25 @@ export default class MenuOverlay extends Phaser.Scene {
     const closeZoneWidth = 14; // pixels, adjust as needed
     const closeZoneHeight = 9;
     const closeZone = this.add.zone(
-        modalX + modalW - closeZoneWidth - 7, // top-right X
-        modalY + 3,                          // top-right Y
-        closeZoneWidth,
-        closeZoneHeight
+      modalX + modalW - closeZoneWidth - 7, // top-right X
+      modalY + 3,                          // top-right Y
+      closeZoneWidth,
+      closeZoneHeight
     )
-    .setOrigin(0, 0) // origin at top-left of zone
-    .setInteractive({ cursor: 'pointer' })
-    .setDepth(5);
+      .setOrigin(0, 0) // origin at top-left of zone
+      .setInteractive({ cursor: 'pointer' })
+      .setDepth(5);
 
     closeZone.on('pointerdown', () => {
       this.close();
+    });
+
+    closeZone.on('pointerover', () => {
+      modalImage.setFrame(1);
+    });
+
+    closeZone.on('pointerout', () => {
+      modalImage.setFrame(0);
     });
 
     // listen for external close/apply
@@ -184,6 +201,6 @@ class BasePanelStub {
     this.detail.add(this.label);
   }
   getListItems() { return []; }
-  onListSelect(item) {}
+  onListSelect(item) { }
   destroy() { this.label?.destroy(); this.detail.removeAll(true); }
 }
