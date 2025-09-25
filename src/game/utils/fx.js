@@ -2,30 +2,45 @@ export function spawnSparks(context, originX, originY, side, getDepthFn) {
     const count = Phaser.Math.Between(6, 10);
 
     for (let i = 0; i < count; i++) {
-        const g = context.scene.add.graphics();
-        g.setDepth(getDepthFn());
+        // Use object pool if available, otherwise create new
+        let spark;
+        if (context.scene.effectPool) {
+            spark = context.scene.effectPool.getSpark();
+        } else {
+            const g = context.scene.add.graphics();
+            spark = {
+                graphics: g,
+                vx: 0,
+                vy: 0,
+                alpha: 1,
+                lifetime: 0,
+                age: 0,
+                color: 0x40afdd,
+                active: true
+            };
+        }
+
+        spark.graphics.setDepth(getDepthFn());
+        spark.graphics.setVisible(true);
+        spark.graphics.setActive(true);
 
         const offsetX = side === 'left' ? -8 : 8;
-        g.setPosition(originX + offsetX, originY);
-        g.fillStyle(0x40afdd, 1);
-        g.fillRect(0, 0, 1, 1);
+        spark.graphics.setPosition(originX + offsetX, originY);
+        spark.graphics.fillStyle(0x40afdd, 1);
+        spark.graphics.fillRect(0, 0, 1, 1);
 
         const angle = Phaser.Math.FloatBetween(-0.8, 0.8);
         const speed = Phaser.Math.FloatBetween(20, 40);
-        const vx = Math.cos(angle) * speed * (side === 'right' ? 1 : -1);
-        const vy = Math.sin(angle) * 20;
+        spark.vx = Math.cos(angle) * speed * (side === 'right' ? 1 : -1);
+        spark.vy = Math.sin(angle) * 20;
+        spark.alpha = 1;
+        spark.lifetime = 0.3 + Math.random() * 0.2;
+        spark.age = 0;
+        spark.color = Phaser.Display.Color.ValueToColor(
+            Math.random() < 0.5 ? 0x66ffc8 : 0xffe73a
+        ).color;
 
-        context.activeSparks.push({
-            graphics: g,
-            vx,
-            vy,
-            alpha: 1,
-            lifetime: 0.3 + Math.random() * 0.2,
-            age: 0,
-            color: Phaser.Display.Color.ValueToColor(
-                Math.random() < 0.5 ? 0x66ffc8 : 0xffe73a
-            ).color,
-        });
+        context.activeSparks.push(spark);
     }
 }
 
@@ -49,7 +64,12 @@ export function updateSparks(context, delta) {
         spark.graphics.x += Math.sin(spark.age * 30 + i) * 0.05;
 
         if (spark.age >= spark.lifetime) {
-            spark.graphics.destroy();
+            // Use object pool if available
+            if (context.scene.effectPool) {
+                context.scene.effectPool.releaseSpark(spark);
+            } else {
+                spark.graphics.destroy();
+            }
             sparks.splice(i, 1);
         }
     }
@@ -70,8 +90,13 @@ export function updateTracers(context, delta, {
     shouldEmit,
     tracerColor
 }) {
+    // Check if context and scene still exist
+    if (!context || !context.scene) {
+        return;
+    }
+    
     const deltaSec = delta / 1000;
-    const scrollSpeed = context.scene.scrollSpeed;
+    const scrollSpeed = context.scene.scrollSpeed || 0;
     const deltaY = scrollSpeed * deltaSec;
 
     // === Distance-based emission ===
@@ -117,13 +142,18 @@ export function updateTracers(context, delta, {
 }
 
 export function updateRubberMarks(instance, delta, config = {}) {
+    // Check if instance and scene still exist
+    if (!instance || !instance.scene) {
+        return;
+    }
+    
     const {
         isHero = false,
         backwardThreshold = 0.1,
         rubberColor = 0x151515,
     } = config;
 
-    const scrollSpeed = instance.scene.scrollSpeed;
+    const scrollSpeed = instance.scene.scrollSpeed || 0;
     const canvasHeight = instance.scene.sys.canvas.height;
 
     // === Detect braking ===
@@ -226,10 +256,10 @@ export function spawnExhaust(instance, originX, originY, config = {}) {
 }
 
 export function updateExhaustClouds(instance, delta) {
-    if (!instance.exhaustClouds) return;
+    if (!instance.exhaustClouds || !instance.scene) return;
 
     const dt = delta / 1000;
-    const scrollFactor = instance.scene.scrollSpeed / 10;
+    const scrollFactor = (instance.scene.scrollSpeed || 0) / 10;
 
     for (let i = instance.exhaustClouds.length - 1; i >= 0; i--) {
         const p = instance.exhaustClouds[i];

@@ -15,8 +15,8 @@ const isDev = !app.isPackaged;
 
 function createWindow() {
     const win = new BrowserWindow({
-        width: 320,
-        height: 180,
+        // width: 320,
+        // height: 180,
         // autoHideMenuBar: true,
         // fullscreen: true,
         webPreferences: {
@@ -48,6 +48,17 @@ app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer,CanvasOopRast
 // app.commandLine.appendSwitch('disable-gpu-shader-disk-cache');
 
 app.whenReady().then(createWindow);
+
+// app.whenReady().then(async () => {
+//     const win = new BrowserWindow({ /* ... */ });
+//     const ses = win.webContents.session;
+//     await ses.clearCache();
+//     await ses.clearStorageData({ storages: ['appcache','shadercache','cachestorage'] });
+//     // Optional: also disable http cache at dev time
+//     app.commandLine.appendSwitch('disable-http-cache');
+  
+//     win.loadFile('dist/index.html');
+//   });
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();

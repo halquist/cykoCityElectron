@@ -3,15 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/renderer/index.js',
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
-  entry: './src/renderer/index.js',
-  devtool: 'source-map',
+  devtool: false, // Disable source maps in production for better performance
   resolve: {
     extensions: ['.js'],
     fallback: {
@@ -40,5 +39,13 @@ module.exports = {
         use: 'babel-loader',
       },
     ],
+  },
+  optimization: {
+    minimize: true,
+  },
+  performance: {
+    hints: 'warning',
+    maxAssetSize: 1000000,
+    maxEntrypointSize: 1000000,
   },
 };

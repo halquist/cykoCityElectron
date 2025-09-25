@@ -96,7 +96,7 @@ function getDamageColor(amount, type) {
 
 function createDamageText(scene, x, y, amount, color) {
     return scene.add.text(x, y, amount, {
-        fontFamily: "pixelFont, sans-serif",
+        fontFamily: "pixelFontV2, Calibri",
         fontSize: '16px',
         color,
         stroke: '#000000',

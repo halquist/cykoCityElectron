@@ -12,6 +12,9 @@ import { imageLoader, imageCreator } from "../utils/images.js";
 import PowerupManager from "../components/powerupManagerClass.js";
 import EnemyManager from "../components/enemyManagerClass.js";
 import RoadManager from "../components/roadManager.js";
+import { EffectPool } from "../utils/objectPool.js";
+import { EffectThrottledUpdate, UIThrottledUpdate } from "../utils/throttledUpdate.js";
+import { PerformanceMonitor } from "../utils/performanceMonitor.js";
 import { readFileSync } from 'fs';
 // import Projectile from "../components/projectileClass.js";
 
@@ -41,7 +44,7 @@ export default class TestLevel extends Phaser.Scene {
     }
 
     create() {
-        document.fonts.load('16px "pixelFont"');
+        document.fonts.load('16px "pixelFontV2"');
 
         // this.sound.context.resume();
 
@@ -49,6 +52,14 @@ export default class TestLevel extends Phaser.Scene {
         this.game.soundtrackManager.play({ shuffle: true, volume: 0.6, category: 'background' });
 
         this.soundObj = {};
+
+        // Initialize effect pool for better performance
+        this.effectPool = new EffectPool(this);
+        
+        // Initialize performance monitoring (disabled by default)
+        this.performanceMonitor = new PerformanceMonitor(this);
+        // Uncomment the next line to enable performance monitoring
+        // this.performanceMonitor.enable();
 
         imageCreator(this);
         soundCreator(this, this.soundObj);
@@ -321,12 +332,41 @@ export default class TestLevel extends Phaser.Scene {
 
         this.load.start();   
 
+        // Initialize throttled updates for better performance
+        this.effectUpdate = new EffectThrottledUpdate((time, delta) => {
+            // Update effects at reduced frequency - check if hero still exists
+            if (this.heroBike && !this.heroBike.isDead) {
+                this.heroBike.updateSparks(delta);
+                this.heroBike.updateTracers(delta);
+            }
+        }, 50);
+
+        // Don't throttle UI updates - health bar needs smooth animation
+        // this.uiUpdate = new UIThrottledUpdate((time, delta) => {
+        //     // Update UI at reduced frequency - but health bar needs frequent updates
+        //     uiUpdate(this, delta);
+        // }, 16); // Update UI every ~16ms (60fps) for smooth health bar animation
+
     }
 
     update(time, delta) {
+        // Performance monitoring
+        this.performanceMonitor.update(time, delta);
+        
         this.cursor.update(delta);
+        
+        // Use throttled updates for better performance
+        // this.uiUpdate.update(time, delta); // Disabled - UI needs smooth updates
+        this.effectUpdate.update(time, delta);
+        
+        // Update UI every frame for smooth health bar animation
         uiUpdate(this, delta);
-        this.heroBike.update(time, delta);
+        
+        // Only update hero if it exists and isn't destroyed
+        if (this.heroBike && !this.heroBike.isDestroyed) {
+            this.heroBike.update(time, delta);
+        }
+        
         this.enemyManager.update(time, delta);
         this.obstacleManager.update(delta);
         this.powerupManager.update(delta);

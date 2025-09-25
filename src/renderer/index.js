@@ -4,6 +4,7 @@ import MainMenu from "../game/scenes/MainMenu.js"
 import GangCamp from "../game/scenes/GangCamp.js"
 import MenuOverlay from '../../public/assets/menu/MenuOverlay.js';
 import TestLevel from "../game/scenes/back_alley_battleground.js"
+import { GameConfig } from "../game/config/gameConfig.js"
 
 const width = 320
 const height = 180
@@ -22,13 +23,13 @@ const config = {
   physics: {
     default: "matter",
     matter: {
-      enableSleep: true,
-      gravity: false,
-      // debug: true
-      // fps: 120,
-      // timeScale: 1,          // Default speed
-      // positionIterations: 6, // Optional: improve collision resolution
-      // velocityIterations: 4  // Optional: improve bounce/response quality
+      enableSleep: GameConfig.physics.enableSleep,
+      gravity: GameConfig.physics.gravity,
+      fps: GameConfig.physics.fps,
+      timeScale: 1,
+      positionIterations: GameConfig.physics.positionIterations,
+      velocityIterations: GameConfig.physics.velocityIterations,
+      constraintIterations: GameConfig.physics.constraintIterations,
       // debug: {
       //   showCollisions: true,
       //   showVelocity: true,
@@ -54,10 +55,10 @@ const config = {
   },
   autoFocus: true,
   disableContextMenu: true,
-  pixelArt: true,
-  roundPixels: true,
+  pixelArt: GameConfig.rendering.pixelArt,
+  roundPixels: GameConfig.rendering.roundPixels,
   autoRound: true,
-  antialias: false,
+  antialias: GameConfig.rendering.antialias,
   expandParent: true,
   gameTitle: "CYKO CITY",
   gameVerson: 0.1,

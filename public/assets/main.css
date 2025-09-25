@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'pixelFont';
-    src: url('fonts/warboundpixel.ttf') format("truetype");
+    font-family: 'pixelFontV2';
+    src: url('fonts/compact_pixel_font_v2.ttf') format("truetype");
     font-display: block;
 }
 
@@ -23,7 +23,7 @@ body {
     padding: 0;
     color: rgba(255, 255, 255, 0.87);
     background-color: #000000;
-    font-family: "pixelFont", Calibri, Tahoma, sans-serif;
+    font-family: "pixelFontV2", Calibri, Tahoma, sans-serif;
     overflow: hidden;
     width: 100%;
     height: 100%;

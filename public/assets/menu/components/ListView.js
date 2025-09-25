@@ -50,7 +50,7 @@ export class ListView extends Phaser.GameObjects.Container {
   
       this.items.forEach((item, i) => {
         const t = this.scene.add.text(8, i*this.itemHeight+2, item.label ?? String(item), {
-          fontFamily: 'pixelFont, monospace',
+          fontFamily: 'pixelFontV2, Calibri',
           fontSize: '16px',
           color: '#223ae6a',
           resolution: 30,

@@ -17,7 +17,7 @@ export class TabBar extends Phaser.GameObjects.Container {
         // g.lineStyle(1, this.color, 1).strokeRect(offsetX+0.5, 0.5, w-1, h-1);
   
         const txt = scene.add.text(offsetX + 9, -8, t.label, {
-          fontFamily: 'pixelFont, monospace', 
+          fontFamily: 'pixelFontV2, Calibri', 
           fontSize: '16px',
           color: '#23ae6a',
           resolution: 30,

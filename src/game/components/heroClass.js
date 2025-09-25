@@ -155,6 +155,7 @@ export default class Hero {
         this.tracerColor = Phaser.Display.Color.ValueToColor(config.bike.tracerColor).color;
         this.rubberMarkSpacingTimer = 0;
         this.isDead = false;
+        this.isDestroyed = false;
 
         this.prevDpadState = {
             left: false,
@@ -1135,6 +1136,9 @@ export default class Hero {
     
 
     destroy() {
+        // Mark as destroyed first to prevent further updates
+        this.isDestroyed = true;
+        
         if (!this.scene.deathMessageSprite) {
             const centerX = this.scene.cameras.main.width / 2;
             const centerY = this.scene.cameras.main.height / 2;
@@ -1147,21 +1151,29 @@ export default class Hero {
             this.scene.deathMessageSprite = msg;
             this.scene.deathMessageSprite.anims.play("death_message_flicker", true);
         }
-        // Cancel melee attack delay timer if active
+        
+        // Cancel all timers
         if (this.meleeAttackDelayTimer) {
             this.meleeAttackDelayTimer.remove(false);
             this.meleeAttackDelayTimer = null;
         }
+        
+        if (this.expireTimer) {
+            this.expireTimer.remove(false);
+            this.expireTimer = null;
+        }
     
         // Destroy all Matter sensors
         for (const sensor of this.activeMeleeSensors) {
-            this.scene.matter.world.remove(sensor);
+            if (sensor && this.scene.matter.world) {
+                this.scene.matter.world.remove(sensor);
+            }
             this.scene.activeMeleeSensors.delete(sensor);
         }
         this.activeMeleeSensors.length = 0;
     
         // Destroy body
-        if (this.bodySprite?.body) {
+        if (this.bodySprite?.body && this.scene.matter.world) {
             this.scene.matter.world.remove(this.bodySprite.body);
         }
         this.bodySprite?.destroy();
@@ -1173,20 +1185,27 @@ export default class Hero {
         this.rangedWeaponSprite?.destroy();
     
         // Destroy visual effects
-        this.tracers.forEach(t => t?.destroy?.());
-        this.rubberMarks.forEach(r => r?.destroy?.());
-        this.activeSparks.forEach(s => s?.destroy?.());
-        this.exhaustClouds.forEach(e => e?.destroy?.());
+        this.tracers.forEach(t => t?.graphics?.destroy?.());
+        this.rubberMarks.forEach(r => r?.graphics?.destroy?.());
+        this.activeSparks.forEach(s => s?.graphics?.destroy?.());
+        this.exhaustClouds.forEach(e => e?.graphics?.destroy?.());
     
         // Clear arrays
         this.tracers.length = 0;
         this.rubberMarks.length = 0;
         this.activeSparks.length = 0;
         this.exhaustClouds.length = 0;
-
+        
+        // Clear references
+        this.scene = null;
+        this.target = null;
     }
     
     update(time, delta) {
+        if (this.isDestroyed) {
+            return;
+        }
+        
         if (this.isDead) {
             this.handleDying(delta);
             return;

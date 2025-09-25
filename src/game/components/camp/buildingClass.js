@@ -57,7 +57,7 @@ export default class Building extends Phaser.GameObjects.Sprite {
             pos.y + this.labelOffset.y,
             this.displayName,
             {
-              fontFamily: 'pixelFont, sans-serif',
+              fontFamily: 'pixelFontV2, Calibri',
               fontSize: '16px',
               color: '#ef2064',
               stroke: '#000000',
@@ -112,7 +112,7 @@ export default class Building extends Phaser.GameObjects.Sprite {
       
         // Pause the camp scene, then launch the modal
         sp.pause(currentKey);
-        sp.launch('MenuOverlay', { menuKey: 'gang', menuTitle: def.menuTitle || def.name });
+        sp.launch('MenuOverlay', { menuKey: def.menu, menuTitle: def.menuTitle || def.name });
       
         // (Optional) tell others which structure opened it
         this.scene.events.emit('open-structure-menu', { id, state });

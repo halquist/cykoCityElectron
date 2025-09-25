@@ -6,12 +6,16 @@ import { events } from '../../../src/state/events.js';
 import { TabBar } from './components/TabBar.js';
 import { ListView } from './components/ListView.js';
 import Cursor from '../../../src/game/components/cursorClass.js';
+import LoadoutPanel from './components/LoadoutPanel.js';
 
 // registry of submenu panels (filled later)
 const PANEL_MAP = {
-  // 'gang': () => new GangPanel(this, contentRect),
-  // 'cykanic': () => new CykanicPanel(this, contentRect),
-  // ...
+  'player:loadout': (scene, bounds) => new LoadoutPanel(scene, bounds),
+  'player:abilities': (scene, bounds) => ({
+    // placeholder for later
+    getListItems(){ return []; },
+    destroy(){},
+  }),
 };
 
 export default class MenuOverlay extends Phaser.Scene {
@@ -70,27 +74,30 @@ export default class MenuOverlay extends Phaser.Scene {
 
     // --- TITLE ---
     this.titleText = this.add.text(modalX + 8, modalY - 4, this.menuTitle, {
-      fontFamily: 'pixelFont, monospace',
+      fontFamily: 'pixelFontV2, Calibri',
       fontSize: '16px',
       color: '#23ae6a',
       resolution: 30,
     }).setDepth(2);
 
-    // --- TABS BAR ---
-    const tabs = [
-      { key: 'gang', label: 'Gang' },
-      { key: 'cykanic', label: 'Cykanic' },
-      { key: 'dealer', label: 'Deala' },
-      { key: 'market', label: 'Black Market' },
-      { key: 'clinik', label: 'Clinik' },
-    ];
 
-    this.tabBar = new TabBar(this, modalX + 4, modalY + 14, tabs, {
-      onTab: (key) => this.switchPanel(key),
-      color: 0x2DE36E,
-      bgColor: 0x001c0e
-    });
-    this.add.existing(this.tabBar);
+    // TABS
+    let tabs;
+    if (this.menuKey === 'player') {
+      tabs = [
+        { key: 'player:loadout',   label: 'Loadout' },
+        { key: 'player:abilities', label: 'Abilities' },
+      ];
+    } else {
+      // your previous camp structure tabs
+      tabs = [
+        { key: 'gang',     label: 'Gang' },
+        { key: 'cykanic',  label: 'Cykanic' },
+        { key: 'dealer',   label: 'Deala' },
+        { key: 'market',   label: 'Black Market' },
+        { key: 'clinik',   label: 'Clinik' },
+      ];
+    }
 
     // --- CONTENT AREA (list left / detail right) ---
     const content = {
@@ -99,6 +106,22 @@ export default class MenuOverlay extends Phaser.Scene {
       w: modalW - 16,
       h: modalH - 58
     };
+
+    this.tabBar = new TabBar(this, modalX + 4, modalY + 14, tabs, {
+      onTab: (key) => this.switchPanel(key, content),
+      color: 0x2DE36E,
+      bgColor: 0x001c0e
+    });
+    this.add.existing(this.tabBar);
+
+    // a container into which each panel renders its stuff
+    if (this.panelContainer) this.panelContainer.destroy();
+    this.panelContainer = this.add.container(0, 0);
+
+    // initial panel
+    const initialKey = (this.menuKey === 'player') ? 'player:loadout' : this.menuKey;
+    this.switchPanel(initialKey, content);
+
     // Optional grid lines for dev
     // g.lineStyle(1, 0x173d2a, 1).strokeRect(content.x, content.y, content.w, content.h);
 
@@ -150,26 +173,44 @@ export default class MenuOverlay extends Phaser.Scene {
     events.on('menu:close', this.close, this);
 
     // go to initial tab/panel
-    this.switchPanel(this.menuKey);
+    this.switchPanel(this.menuKey, content);
   }
 
-  switchPanel(key) {
-    if (this.currentPanel) {
-      this.currentPanel.destroy();
-      this.currentPanel = null;
-    }
+  switchPanel(key, contentBounds) {
+    if (this.currentPanel?.destroy) this.currentPanel.destroy();
     this.tabBar.setActive(key);
-
-    // Create the panel (stub if not implemented yet)
-    const makePanel = PANEL_MAP[key] || (() => new BasePanelStub(this, this.detailContainer, this.detailBounds));
-    this.currentPanel = makePanel.call(this);
-
-    // Ask panel for list items to show in the left column
-    const items = this.currentPanel.getListItems ? this.currentPanel.getListItems() : [];
-    this.list.setItems(items);
-    // Optional auto-select first item
-    if (items.length) this.list.setSelectedIndex(0, true);
+  
+    // clear previous
+    this.panelContainer.removeAll(true);
+  
+    // build new
+    const makePanel = PANEL_MAP[key];
+    if (makePanel) {
+      this.currentPanel = makePanel(this, contentBounds);
+      // let the panel add its display into panelContainer
+      if (this.currentPanel.display) {
+        this.panelContainer.add(this.currentPanel.display);
+      }
+    }
   }
+
+  // switchPanel(key) {
+  //   if (this.currentPanel) {
+  //     this.currentPanel.destroy();
+  //     this.currentPanel = null;
+  //   }
+  //   this.tabBar.setActive(key);
+
+  //   // Create the panel (stub if not implemented yet)
+  //   const makePanel = PANEL_MAP[key] || (() => new BasePanelStub(this, this.detailContainer, this.detailBounds));
+  //   this.currentPanel = makePanel.call(this);
+
+  //   // Ask panel for list items to show in the left column
+  //   const items = this.currentPanel.getListItems ? this.currentPanel.getListItems() : [];
+  //   this.list.setItems(items);
+  //   // Optional auto-select first item
+  //   if (items.length) this.list.setSelectedIndex(0, true);
+  // }
 
   close = () => {
     // fade out sfx/music if needed before closing (optional hook)
@@ -192,7 +233,7 @@ class BasePanelStub {
 
     // placeholder text
     this.label = scene.add.text(0, 0, 'Panel under construction…', {
-      fontFamily: 'pixelFont, monospace',
+      fontFamily: 'pixelFontV2, monospace',
       fontSize: '16px',
       color: '#23ae6a',
       resolution: 30,

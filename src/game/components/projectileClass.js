@@ -170,11 +170,22 @@ export default class Projectile {
     this.display.setVisible(false);
     this.display.setActive(false);
   
-    if (this.body) {
+    // Cancel any timers
+    if (this.expireTimer) {
+      this.expireTimer.remove(false);
+      this.expireTimer = null;
+    }
+  
+    if (this.body && this.scene.matter.world) {
       this.scene.matter.world.remove(this.body);
-      this.body = null; // <<< ADD THIS LINE
+      this.body = null;
     }
   
     this.display.destroy();
+    
+    // Clear references
+    this.scene = null;
+    this.owner = null;
+    this.weaponConfig = null;
   }
 }

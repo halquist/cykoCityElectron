@@ -23,7 +23,7 @@ export default class GangCamp extends Phaser.Scene {
     }
 
     create() {
-        document.fonts.load('16px "pixelFont"');
+        document.fonts.load('16px "pixelFontV2"');
         document.fonts.load('8px "titleFont"');
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'camp_bg')
           .setOrigin(0.5, 0.5)

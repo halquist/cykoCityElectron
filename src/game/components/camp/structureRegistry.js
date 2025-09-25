@@ -17,19 +17,19 @@ export const STRUCTURES = {
       levels: [
         { texture:'crash_pad', hitbox:{w:64,h:40,ox:0,oy:12} }
       ],
-      menu: 'crash_pad_menu',
+      menu: 'player',
       menuTitle: 'Player',
     //   onHover: (sprite)=> sprite.setTint(0x9ad1ff),
     //   onUnhover: (sprite)=> sprite.clearTint(),
     },
     cykanic: {
         key: 'cykanic',
-        displayName: 'Cykanic Shop',
+        displayName: 'Garage',
         levels: [
           { texture:'cykanic', hitbox:{w:64,h:40,ox:0,oy:12} }
         ],
         menu: 'cykanic_menu',
-        menuTitle: 'Cykanic Shop',
+        menuTitle: 'Garage',
         // onHover: (sprite)=> sprite.setTint(0x9ad1ff),
         // onUnhover: (sprite)=> sprite.clearTint(),
     },

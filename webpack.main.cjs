@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './main.cjs',
   target: 'electron-main',
   output: {

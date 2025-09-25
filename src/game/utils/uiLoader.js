@@ -71,6 +71,11 @@ const createAbilityCard = (scene) => {
 }
 
 const updateAbilityCard = (scene, delta) => {
+  // Check if hero exists before updating ability card
+  if (!scene.heroBike || scene.heroBike.isDestroyed) {
+    return;
+  }
+
   const hero = scene.heroBike;
   const card = scene.abilityCard;
 
@@ -147,6 +152,11 @@ const createHealthBar = (scene) => {
 }
 
 const updateHealthBar = (scene) => {
+  // Check if hero exists before updating health bar
+  if (!scene.heroBike || scene.heroBike.isDestroyed) {
+    return;
+  }
+
   const neonGreenBlue = Phaser.Display.Color.ValueToColor(0x00ffcc); // full
   const neonBlue      = Phaser.Display.Color.ValueToColor(0x00bfff); // mid
   const neonPink      = Phaser.Display.Color.ValueToColor(0xff1cff); // low
@@ -163,8 +173,8 @@ const updateHealthBar = (scene) => {
 
   uiState.lastHp = scene.heroBike.health;
 
-  // Ease ratio toward actual health
-  uiState.currentRatio += (targetRatio - uiState.currentRatio) * 0.06;
+  // Ease ratio toward actual health - increased speed for more responsive animation
+  uiState.currentRatio += (targetRatio - uiState.currentRatio) * 0.15;
   const ratio = uiState.currentRatio;
 
   // Base color (interpolated)
@@ -246,6 +256,11 @@ const createRangedCard = (scene) => {
 };
 
 const updateRangedCard = (scene, delta) => {
+  // Check if hero exists before updating ranged card
+  if (!scene.heroBike || scene.heroBike.isDestroyed) {
+    return;
+  }
+
   const fullWidth = scene.rangedCard.bullets.width / 2;
   const bulletCount = scene.heroBike.currentRangedWeapon.maxAmmo;
   const current = scene.heroBike.currentRangedWeapon.currentAmmo;
